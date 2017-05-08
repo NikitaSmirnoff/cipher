@@ -1,14 +1,18 @@
 
 Nikita Smirnov
 
-5/4/2017
+5/4/2017 - Thursday
 - Make a plan for setting up Enigma I.
 
-5/5/2017
+5/5/2017 - Friday
 - Created interface called Rotor in order to require the Rotor classes to have their wiring and settings.
 - RotorI, RotorII, RotorIII, RotorIV, RotorV classes created and implement Rotor interface.
 - Added constructors to Rotors and the following methods:
 	getTurnoverNotch(); getAlphabet(); getRotorWiring(); getConnection(String letter);
 
-
-
+5/5/2017 - Monday
+- Added the alphabet and specific rotor wirings each rotor.
+- For classes RotorI - RotorV, getConnection(String letter) now works.
+- Created class called Plugboard with methods:
+	createPlugboard(); getAlphabet(); getPlugboard(); getPlugs(); getConnection();
+- Created class called EnigmaI and started the constructor.

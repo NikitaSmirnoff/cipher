@@ -1,16 +1,15 @@
 package enigma;
 
-import java.util.ArrayList;
 
 public interface Rotor {
 	
 	public String getTurnoverNotch();
 	
-	public ArrayList<String> getAlphabet();
+	public char[] getAlphabet();
 	
-	public ArrayList<String> getRotorWiring();
+	public char[] getRotorWiring();
 	
-	public String getConnection(String letter);
+	public char getConnection(String letter);
 	
 	
 }

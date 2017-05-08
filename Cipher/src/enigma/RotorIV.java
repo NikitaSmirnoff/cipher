@@ -1,31 +1,33 @@
 package enigma;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RotorIV implements Rotor{
 
 	private String turnoverNotch;
-	private ArrayList<String> alphabet;
-	private ArrayList<String> rotorWiring;
+	private char[] alphabet;
+	private char[] rotorWiring;
 	 
 	public RotorIV() {
-		turnoverNotch = "K";
+		this.turnoverNotch = "K";
+		this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+		this.rotorWiring = "ESOVPZJAYQUIRHXLNFTGKDCMWB".toCharArray();
 	}
 
 	public String getTurnoverNotch() {
-		return turnoverNotch;
+		return this.turnoverNotch;
 	}
 
-	public ArrayList<String> getAlphabet() {
-		return alphabet;
+	public char[] getAlphabet() {
+		return this.alphabet;
 	}
 
-	public ArrayList<String> getRotorWiring() {
-		return rotorWiring;
+	public char[] getRotorWiring() {
+		return this.rotorWiring;
 	}
 
-	public String getConnection(String letter) {
-		return null;
+	public char getConnection(String letter) {
+		return this.rotorWiring[Arrays.asList(alphabet).indexOf(letter)];
 	}
 
 }
