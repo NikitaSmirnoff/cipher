@@ -11,7 +11,7 @@ Nikita Smirnov
 	getTurnoverNotch(); getAlphabet(); getRotorWiring(); getConnection(String letter);
 
 5/8/2017 - Monday (2 Periods)
-- Added the alphabet and specific rotor wirings each rotor.
+- Added the alphabet and specific rotor wirings to each rotor.
 - For classes RotorI - RotorV, getConnection(String letter) now works.
 - Created class called Plugboard with methods:
 	createPlugboard(); getAlphabet(); getPlugboard(); getPlugs(); getConnection();
@@ -21,7 +21,8 @@ Nikita Smirnov
 - Removed classes RotorII - RotorV and instead added a parameter that would create a rotor with specified wiring.
 
 5/10/2017 - Wednesday (2 Periods)
-- Added class called Reflector which represents UKW-A, UKW-B, UKW-C
+- Created class called Reflector which represent reflectors UKW-A, UKW-B, UKW-C with methods:
+	getAlphabet(); getReflectorWiring(); getConnection(String letter);
 - Added ring setting parameter to Rotor.
 - Changed all char variable types to Strings to avoid confusion and later consequences.
 - Started method encodeChar(String letter);
