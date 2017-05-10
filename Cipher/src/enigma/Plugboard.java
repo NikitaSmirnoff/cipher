@@ -34,6 +34,10 @@ public class Plugboard {
 	}
 
 	public String getConnection(String letter) {
-		return this.plugboard[Arrays.asList(alphabet).indexOf(letter)];
+		return this.plugboard[getPos(letter)];
+	}
+	
+	private int getPos(String letter) {
+		return Arrays.asList(alphabet).indexOf(letter);
 	}
 }

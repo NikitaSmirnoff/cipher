@@ -23,6 +23,12 @@ Nikita Smirnov
 5/10/2017 - Wednesday (2 Periods)
 - Created class called Reflector which represent reflectors UKW-A, UKW-B, UKW-C with methods:
 	getAlphabet(); getReflectorWiring(); getConnection(String letter);
-- Added ring setting parameter to Rotor.
+- Added ringSetting parameter to Rotor, as well as methods:
+	getRingSetting(); setRingSetting(String letter); incrementRingSetting(); decrementRingSetting();
 - Changed all char variable types to Strings to avoid confusion and later consequences.
 - Started method encodeChar(String letter);
+- Added method getPos(String letter) which returns the position of the letter in the alphabet to classes: 
+	Rotor, Plugboard, and Reflector.
+- Added method encodeLetter(String letter); to Rotor class, which converts the input letter to the letter at relative position 
+of the rotor based on the ring setting, and then uses getConnection(String letter) to get the specific letter that's wired 
+to the input letter.

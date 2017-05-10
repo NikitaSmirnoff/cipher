@@ -21,9 +21,10 @@ public class EnigmaI {
 
 	private static void encodeChar(String letter) {
 		String resultOfPlugboard = plugboard.getConnection(letter);
-		String resultOfRotorRight = rotors[2].getConnection(resultOfPlugboard);
-		String resultOfRotorMiddle = rotors[1].getConnection(resultOfRotorRight);
-		String resultOfRotorLeft = rotors[0].getConnection(resultOfRotorMiddle);
+		
+		String resultOfRotorRight = rotors[2].encodeLetter(resultOfPlugboard);
+		String resultOfRotorMiddle = rotors[1].encodeLetter(resultOfRotorRight);
+		String resultOfRotorLeft = rotors[0].encodeLetter(resultOfRotorMiddle);
 		String resultOfReflector = reflector.getConnection(resultOfRotorLeft);
 		
 		

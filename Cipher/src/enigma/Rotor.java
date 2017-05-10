@@ -36,22 +36,28 @@ public class Rotor implements RotorInterface{
 		}
 	}
 
-	public String getTurnoverNotch() {
-		return this.turnoverNotch;
-	}
-	
 	public String getRingSetting() {
 		return this.ringSetting;
 	}
 	
-	public String setRingSetting(String rs) {
-		return this.ringSetting = rs;
+	public void setRingSetting(String rs) {
+		this.ringSetting = rs;
 	}
 	
 	public String incrementRingSetting() {
-		return this.ringSetting = this.alphabet[Arrays.asList(alphabet).indexOf(this.ringSetting) + 1];
+		this.ringSetting = this.alphabet[getPos(this.ringSetting) + 1];
+		return this.ringSetting;
+	}
+	
+	public String decrementRingSetting() {
+		this.ringSetting = this.alphabet[getPos(this.ringSetting) - 1];
+		return this.ringSetting;
 	}
 
+	public String getTurnoverNotch() {
+		return this.turnoverNotch;
+	}
+	
 	public String[] getAlphabet() {
 		return this.alphabet;
 	}
@@ -60,8 +66,17 @@ public class Rotor implements RotorInterface{
 		return this.rotorWiring;
 	}
 
+	public String encodeLetter(String letter) {
+		int relativePos = (getPos(letter) + getPos(this.ringSetting)) % 26;
+		return getConnection(this.alphabet[relativePos]);
+	}
+	
 	public String getConnection(String letter) {
-		return this.rotorWiring[Arrays.asList(alphabet).indexOf(letter)];
+		return this.rotorWiring[getPos(letter)];
+	}
+
+	private int getPos(String letter) {
+		return Arrays.asList(alphabet).indexOf(letter);
 	}
 
 }

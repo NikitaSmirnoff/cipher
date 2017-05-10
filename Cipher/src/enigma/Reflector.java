@@ -32,7 +32,11 @@ public class Reflector {
 	}
 
 	public String getConnection(String letter) {
-		return this.reflectorWiring[Arrays.asList(alphabet).indexOf(letter)];
+		return this.reflectorWiring[getPos(letter)];
+	}
+	
+	private int getPos(String letter) {
+		return Arrays.asList(alphabet).indexOf(letter);
 	}
 
 }
