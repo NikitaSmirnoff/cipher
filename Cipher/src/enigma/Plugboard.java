@@ -4,28 +4,28 @@ import java.util.Arrays;
 
 public class Plugboard {
 	
-	private char[] alphabet;
-	private char[] plugboard = new char[26];
+	private String[] alphabet;
+	private String[] plugboard = new String[26];
 	private String[] plugs;
 
 	public Plugboard(String[] connections) {
-		this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+		System.arraycopy("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""), 1, this.alphabet, 0, 26);
 		this.plugs = connections;
 		createPlugboard();
 	}
 
 	private void createPlugboard() {
 		for(int i = 0; i < plugs.length; i++){
-			this.plugboard[alphabet.toString().indexOf(plugs[i].charAt(0))] = plugs[i].charAt(1);
-			this.plugboard[alphabet.toString().indexOf(plugs[i].charAt(1))] = plugs[i].charAt(0);
+			this.plugboard[alphabet.toString().indexOf(plugs[i].charAt(0))] = plugs[i].substring(1, 2);
+			this.plugboard[alphabet.toString().indexOf(plugs[i].charAt(1))] = plugs[i].substring(0, 1);
 		}
 	}
 
-	public char[] getAlphabet() {
+	public String[] getAlphabet() {
 		return this.alphabet;
 	}
 
-	public char[] getPlugboard() {
+	public String[] getPlugboard() {
 		return this.plugboard;
 	}
 	
@@ -33,7 +33,7 @@ public class Plugboard {
 		return this.plugs;
 	}
 
-	public char getConnection(String letter) {
+	public String getConnection(String letter) {
 		return this.plugboard[Arrays.asList(alphabet).indexOf(letter)];
 	}
 }
