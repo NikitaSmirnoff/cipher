@@ -24,3 +24,4 @@ Nikita Smirnov
 - Added class called Reflector which represents UKW-A, UKW-B, UKW-C
 - Added ring setting parameter to Rotor.
 - Changed all char variable types to Strings to avoid confusion and later consequences.
+- Started method encodeChar(String letter);
