@@ -32,3 +32,9 @@ Nikita Smirnov
 - Added method encodeLetter(String letter); to Rotor class, which converts the input letter to the letter at relative position 
 of the rotor based on the ring setting, and then uses getConnection(String letter) to get the specific letter that's wired 
 to the input letter.
+
+5/11/2017 - Thursday (1 Period)
+- Added Rotor stepping to encodeChar(); which uses the turnover notches to keep stepping each rotor.
+
+
+

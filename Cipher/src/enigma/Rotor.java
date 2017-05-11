@@ -4,58 +4,68 @@ import java.util.Arrays;
 
 public class Rotor implements RotorInterface{
 
-	private String turnoverNotch;
-	private String ringSetting;
+	private String turnoverNotchFirst;
+	private String turnoverNotchSecond;
+	private String rotorSetting;
 	private String[] alphabet;
 	private String[] rotorWiring;
 	 
 	public Rotor(int r, String rs) {
 		
-		this.ringSetting = rs;
+		this.rotorSetting = rs;
 		System.arraycopy("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""), 1, this.alphabet, 0, 26);
 		
 		if(r == 1){
-			this.turnoverNotch = "R";
+			this.turnoverNotchFirst = "Q";
+			this.turnoverNotchSecond = "R";
 			System.arraycopy("EKMFLGDQVZNTOWYHXUSPAIBRCJ".split(""), 1, this.rotorWiring, 0, 26);
 		}
 		if(r == 2){
-			this.turnoverNotch = "F";
+			this.turnoverNotchFirst = "E";
+			this.turnoverNotchSecond = "F";
 			System.arraycopy("AJDKSIRUXBLHWTMCQGZNPYFVOE".split(""), 1, this.rotorWiring, 0, 26);
 		}
 		if(r == 3){
-			this.turnoverNotch = "W";
+			this.turnoverNotchFirst = "V";
+			this.turnoverNotchSecond = "W";
 			System.arraycopy("BDFHJLCPRTXVZNYEIWGAKMUSQO".split(""), 1, this.rotorWiring, 0, 26);
 		}
 		if(r == 4){
-			this.turnoverNotch = "K";
+			this.turnoverNotchFirst = "J";
+			this.turnoverNotchSecond = "K";
 			System.arraycopy("ESOVPZJAYQUIRHXLNFTGKDCMWB".split(""), 1, this.rotorWiring, 0, 26);
 		}
 		if(r == 5){
-			this.turnoverNotch = "A";
+			this.turnoverNotchFirst = "Z";
+			this.turnoverNotchSecond = "A";
 			System.arraycopy("VZBRGITYUPSDNHLXAWMJQOFECK".split(""), 1, this.rotorWiring, 0, 26);
 		}
 	}
 
-	public String getRingSetting() {
-		return this.ringSetting;
+	public String getRotorSetting() {
+		return this.rotorSetting;
 	}
 	
-	public void setRingSetting(String rs) {
-		this.ringSetting = rs;
+	public void setRotorSetting(String rs) {
+		this.rotorSetting = rs;
 	}
 	
-	public String incrementRingSetting() {
-		this.ringSetting = this.alphabet[getPos(this.ringSetting) + 1];
-		return this.ringSetting;
+	public String incrementRotorSetting() {
+		this.rotorSetting = this.alphabet[(getPos(this.rotorSetting) + 1) % 26];
+		return this.rotorSetting;
 	}
 	
-	public String decrementRingSetting() {
-		this.ringSetting = this.alphabet[getPos(this.ringSetting) - 1];
-		return this.ringSetting;
+	public String decrementRotorSetting() {
+		this.rotorSetting = this.alphabet[(getPos(this.rotorSetting) - 1) % 26];
+		return this.rotorSetting;
+	}
+	
+	public String getFirstTurnoverNotch() {
+		return this.turnoverNotchFirst;
 	}
 
-	public String getTurnoverNotch() {
-		return this.turnoverNotch;
+	public String getSecondTurnoverNotch() {
+		return this.turnoverNotchSecond;
 	}
 	
 	public String[] getAlphabet() {
@@ -67,7 +77,7 @@ public class Rotor implements RotorInterface{
 	}
 
 	public String encodeLetter(String letter) {
-		int relativePos = (getPos(letter) + getPos(this.ringSetting)) % 26;
+		int relativePos = (getPos(letter) + getPos(this.rotorSetting)) % 26;
 		return getConnection(this.alphabet[relativePos]);
 	}
 	
@@ -77,6 +87,12 @@ public class Rotor implements RotorInterface{
 
 	private int getPos(String letter) {
 		return Arrays.asList(alphabet).indexOf(letter);
+	}
+
+	@Override
+	public String getTurnoverNotch() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
