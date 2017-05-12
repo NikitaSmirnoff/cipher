@@ -36,5 +36,9 @@ to the input letter.
 5/11/2017 - Thursday (1 Period)
 - Added Rotor stepping to encodeChar(); which uses the turnover notches to keep stepping each rotor.
 
+5/12/2017 - Friday (2 Periods)
+- Finished encodeChar();
+- Debugging
+
 
 

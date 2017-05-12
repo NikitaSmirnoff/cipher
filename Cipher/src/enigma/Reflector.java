@@ -2,23 +2,23 @@ package enigma;
 
 import java.util.Arrays;
 
-public class Reflector {
+public class Reflector{
 
 	private String[] alphabet;
 	private String[] reflectorWiring;
 	 
 	public Reflector(String r) {
 		
-		System.arraycopy("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""), 1, this.alphabet, 0, 26);
+		this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 		
 		if(r.equals("A")){
-			System.arraycopy("EJMZALYXVBWFCRQUONTSPIKHGD".split(""), 1, this.reflectorWiring, 0, 26);
+			this.reflectorWiring = "EJMZALYXVBWFCRQUONTSPIKHGD".split("");
 		}
 		if(r.equals("B")){
-			System.arraycopy("YRUHQSLDPXNGOKMIEBFZCWVJAT".split(""), 1, this.reflectorWiring, 0, 26);
+			this.reflectorWiring = "YRUHQSLDPXNGOKMIEBFZCWVJAT".split("");
 		}
 		if(r.equals("C")){
-			System.arraycopy("FVPJIAOYEDRZXWGCTKUQSBNMHL".split(""), 1, this.reflectorWiring, 0, 26);
+			this.reflectorWiring = "FVPJIAOYEDRZXWGCTKUQSBNMHL".split("");
 		}
 		
 	}
@@ -29,6 +29,10 @@ public class Reflector {
 
 	public String[] getReflectorWiring() {
 		return this.reflectorWiring;
+	}
+	
+	public String encodeLetter(String letter) {
+		return getConnection(this.alphabet[getPos(letter)]);
 	}
 
 	public String getConnection(String letter) {

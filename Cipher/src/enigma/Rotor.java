@@ -13,32 +13,32 @@ public class Rotor implements RotorInterface{
 	public Rotor(int r, String rs) {
 		
 		this.rotorSetting = rs;
-		System.arraycopy("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""), 1, this.alphabet, 0, 26);
+		this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 		
 		if(r == 1){
 			this.turnoverNotchFirst = "Q";
 			this.turnoverNotchSecond = "R";
-			System.arraycopy("EKMFLGDQVZNTOWYHXUSPAIBRCJ".split(""), 1, this.rotorWiring, 0, 26);
+			this.rotorWiring = "EKMFLGDQVZNTOWYHXUSPAIBRCJ".split("");
 		}
 		if(r == 2){
 			this.turnoverNotchFirst = "E";
 			this.turnoverNotchSecond = "F";
-			System.arraycopy("AJDKSIRUXBLHWTMCQGZNPYFVOE".split(""), 1, this.rotorWiring, 0, 26);
+			this.rotorWiring = "AJDKSIRUXBLHWTMCQGZNPYFVOE".split("");
 		}
 		if(r == 3){
 			this.turnoverNotchFirst = "V";
 			this.turnoverNotchSecond = "W";
-			System.arraycopy("BDFHJLCPRTXVZNYEIWGAKMUSQO".split(""), 1, this.rotorWiring, 0, 26);
+			this.rotorWiring = "BDFHJLCPRTXVZNYEIWGAKMUSQO".split("");
 		}
 		if(r == 4){
 			this.turnoverNotchFirst = "J";
 			this.turnoverNotchSecond = "K";
-			System.arraycopy("ESOVPZJAYQUIRHXLNFTGKDCMWB".split(""), 1, this.rotorWiring, 0, 26);
+			this.rotorWiring = "ESOVPZJAYQUIRHXLNFTGKDCMWB".split("");
 		}
 		if(r == 5){
 			this.turnoverNotchFirst = "Z";
 			this.turnoverNotchSecond = "A";
-			System.arraycopy("VZBRGITYUPSDNHLXAWMJQOFECK".split(""), 1, this.rotorWiring, 0, 26);
+			this.rotorWiring = "VZBRGITYUPSDNHLXAWMJQOFECK".split("");
 		}
 	}
 
@@ -88,11 +88,20 @@ public class Rotor implements RotorInterface{
 	private int getPos(String letter) {
 		return Arrays.asList(alphabet).indexOf(letter);
 	}
-
-	@Override
-	public String getTurnoverNotch() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public String encodeLetterBack(String letter) {
+		int relativePos = (getPosBack(letter) + getPos(this.rotorSetting)) % 26;
+		return getConnection(this.rotorWiring[relativePos]);
 	}
+	
+	public String getConnectionBack(String letter) {
+		return this.alphabet[getPosBack(letter)];
+	}
+
+	private int getPosBack(String letter) {
+		return Arrays.asList(rotorWiring).indexOf(letter);
+	}
+
+	
 
 }
