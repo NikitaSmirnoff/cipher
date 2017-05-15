@@ -7,19 +7,20 @@ public class Plugboard{
 	private String[] alphabet;
 	private String[] plugboard = new String[26];
 	private String[] plugs;
+	private String abc;
 
 	public Plugboard(String[] connections) {
 		this.plugs = connections;
 		this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+		this.abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		createPlugboard();
 	}
 
 	private void createPlugboard() {
-		System.out.println(Arrays.toString(alphabet).indexOf(plugs[0].charAt(1)));
 		
 		for(int i = 0; i < plugs.length; i++){
-			this.plugboard[Arrays.toString(alphabet).indexOf(plugs[i].charAt(0))] = plugs[i].substring(1);
-			this.plugboard[Arrays.toString(alphabet).indexOf(plugs[i].charAt(1))] = plugs[i].substring(0, 1);
+			this.plugboard[this.abc.indexOf(plugs[i].charAt(0))] = plugs[i].substring(1);
+			this.plugboard[this.abc.indexOf(plugs[i].charAt(1))] = plugs[i].substring(0, 1);
 		}
 	}
 

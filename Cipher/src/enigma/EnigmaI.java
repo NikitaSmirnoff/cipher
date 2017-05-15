@@ -23,7 +23,7 @@ public class EnigmaI {
 	public static void main(String[] args) {
 		String[] plugs = {"AB"};
 		enigma = new EnigmaI(plugs, 1, "A", 2, "A", 3, "Z", "B");
-		System.out.println(enigma.encodeChar("A"));
+		enigma.encodeChar("A");
 	}
 
 	private String encodeChar(String letter) {
@@ -41,18 +41,32 @@ public class EnigmaI {
 		}
 		
 		String resultOfPlugboard = plugboard.getConnection(letter);
+		System.out.println("resultOfPlugboard = " + resultOfPlugboard);
+		System.out.println("");
 		
 		String resultOfRotorRight = rotors[RIGHT].encodeLetter(resultOfPlugboard);
+		System.out.println("resultOfRotorRight = " + resultOfRotorRight);
 		String resultOfRotorMiddle = rotors[MIDDLE].encodeLetter(resultOfRotorRight);
+		System.out.println("resultOfRotorMiddle = " + resultOfRotorMiddle);
 		String resultOfRotorLeft = rotors[LEFT].encodeLetter(resultOfRotorMiddle);
+		System.out.println("resultOfRotorLeft = " + resultOfRotorLeft);
+		System.out.println("");
 		
 		String resultOfReflector = reflector.getConnection(resultOfRotorLeft);
+		System.out.println("resultOfReflector = " + resultOfReflector);
+		System.out.println("");
 		
 		String resultOfRotorLeftBack = rotors[LEFT].encodeLetterBack(resultOfReflector);
+		System.out.println("resultOfRotorLeftBack = " + resultOfRotorLeftBack);
 		String resultOfRotorMiddleBack = rotors[MIDDLE].encodeLetterBack(resultOfRotorLeftBack);
+		System.out.println("resultOfRotorMiddleBack = " + resultOfRotorMiddleBack);
 		String resultOfRotorRightBack = rotors[RIGHT].encodeLetterBack(resultOfRotorMiddleBack);
+		System.out.println("resultOfRotorRightBack = " + resultOfRotorRightBack);
+		System.out.println("");
 		
 		String resultOfPlugboardBack = plugboard.getConnectionBack(resultOfRotorRightBack);
+		System.out.println("resultOfPlugboardBack = " + resultOfPlugboardBack);
+		System.out.println("");
 		
 		return resultOfPlugboardBack;
 		
