@@ -21,8 +21,8 @@ public class EnigmaI {
 	}
 	
 	public static void main(String[] args) {
-		String[] plugs = {"AB"};
-		enigma = new EnigmaI(plugs, 1, "A", 2, "A", 3, "Z", "B");
+		String[] plugs = {"AZ", "XY"};
+		enigma = new EnigmaI(plugs, 1, "D", 2, "B", 3, "R", "B");
 		enigma.encodeChar("A");
 	}
 
@@ -46,9 +46,9 @@ public class EnigmaI {
 		
 		String resultOfRotorRight = rotors[RIGHT].encodeLetter(resultOfPlugboard);
 		System.out.println("resultOfRotorRight = " + resultOfRotorRight);
-		String resultOfRotorMiddle = rotors[MIDDLE].encodeLetter(resultOfRotorRight);
+		String resultOfRotorMiddle = rotors[MIDDLE].encodeLetterAfter(resultOfRotorRight, rotors[RIGHT].getRotorSetting());
 		System.out.println("resultOfRotorMiddle = " + resultOfRotorMiddle);
-		String resultOfRotorLeft = rotors[LEFT].encodeLetter(resultOfRotorMiddle);
+		String resultOfRotorLeft = rotors[LEFT].encodeLetterAfter(resultOfRotorMiddle, rotors[MIDDLE].getRotorSetting());
 		System.out.println("resultOfRotorLeft = " + resultOfRotorLeft);
 		System.out.println("");
 		
@@ -56,11 +56,11 @@ public class EnigmaI {
 		System.out.println("resultOfReflector = " + resultOfReflector);
 		System.out.println("");
 		
-		String resultOfRotorLeftBack = rotors[LEFT].encodeLetterBack(resultOfReflector);
+		String resultOfRotorLeftBack = rotors[LEFT].encodeLetterBackAfter(resultOfReflector, "A");
 		System.out.println("resultOfRotorLeftBack = " + resultOfRotorLeftBack);
-		String resultOfRotorMiddleBack = rotors[MIDDLE].encodeLetterBack(resultOfRotorLeftBack);
+		String resultOfRotorMiddleBack = rotors[MIDDLE].encodeLetterBackAfter(resultOfRotorLeftBack, rotors[LEFT].getRotorSetting());
 		System.out.println("resultOfRotorMiddleBack = " + resultOfRotorMiddleBack);
-		String resultOfRotorRightBack = rotors[RIGHT].encodeLetterBack(resultOfRotorMiddleBack);
+		String resultOfRotorRightBack = rotors[RIGHT].encodeLetterBackAfter(resultOfRotorMiddleBack, rotors[MIDDLE].getRotorSetting());
 		System.out.println("resultOfRotorRightBack = " + resultOfRotorRightBack);
 		System.out.println("");
 		
@@ -70,6 +70,10 @@ public class EnigmaI {
 		
 		return resultOfPlugboardBack;
 		
+	}
+	
+	private String encodeWord(String word) {
+		return word;
 	}
 
 }

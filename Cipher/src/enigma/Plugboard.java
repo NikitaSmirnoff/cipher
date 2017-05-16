@@ -5,22 +5,26 @@ import java.util.Arrays;
 public class Plugboard{
 	
 	private String[] alphabet;
-	private String[] plugboard = new String[26];
+	private String[] plugboard;
 	private String[] plugs;
 	private String abc;
 
 	public Plugboard(String[] connections) {
-		this.plugs = connections;
+		this.plugboard = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 		this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+		this.plugs = connections;
 		this.abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		createPlugboard();
 	}
 
 	private void createPlugboard() {
-		
-		for(int i = 0; i < plugs.length; i++){
-			this.plugboard[this.abc.indexOf(plugs[i].charAt(0))] = plugs[i].substring(1);
-			this.plugboard[this.abc.indexOf(plugs[i].charAt(1))] = plugs[i].substring(0, 1);
+		if(this.plugs == null){
+			this.plugboard = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+		}else{
+			for(int i = 0; i < plugs.length; i++){
+				this.plugboard[this.abc.indexOf(plugs[i].charAt(0))] = plugs[i].substring(1);
+				this.plugboard[this.abc.indexOf(plugs[i].charAt(1))] = plugs[i].substring(0, 1);
+			}
 		}
 	}
 

@@ -78,6 +78,12 @@ public class Rotor implements RotorInterface{
 
 	public String encodeLetter(String letter) {
 		int relativePos = (getPos(letter) + getPos(this.rotorSetting)) % 26;
+		System.out.println(relativePos);
+		return getConnection(this.alphabet[relativePos]);
+	}
+	
+	public String encodeLetterAfter(String letter, String previousRotorSetting) {
+		int relativePos = ((getPos(letter) + getPos(this.rotorSetting)) % 26) - getPos(previousRotorSetting);
 		return getConnection(this.alphabet[relativePos]);
 	}
 	
