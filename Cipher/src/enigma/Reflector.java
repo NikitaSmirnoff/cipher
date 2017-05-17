@@ -31,8 +31,9 @@ public class Reflector{
 		return this.reflectorWiring;
 	}
 	
-	public String encodeLetter(String letter) {
-		return getConnection(this.alphabet[getPos(letter)]);
+	public String encodeLetter(String letter, String previousRotorSetting) {
+		int relativePos = (getPos(letter) - getPos(previousRotorSetting));
+		return getConnection(this.alphabet[relativePos]);
 	}
 
 	public String getConnection(String letter) {

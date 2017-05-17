@@ -52,11 +52,11 @@ public class EnigmaI {
 		System.out.println("resultOfRotorLeft = " + resultOfRotorLeft);
 		System.out.println("");
 		
-		String resultOfReflector = reflector.getConnection(resultOfRotorLeft);
+		String resultOfReflector = reflector.encodeLetter(resultOfRotorLeft, rotors[LEFT].getRotorSetting());
 		System.out.println("resultOfReflector = " + resultOfReflector);
 		System.out.println("");
 		
-		String resultOfRotorLeftBack = rotors[LEFT].encodeLetterBackAfter(resultOfReflector, "A");
+		String resultOfRotorLeftBack = rotors[LEFT].encodeLetterBack(resultOfReflector);
 		System.out.println("resultOfRotorLeftBack = " + resultOfRotorLeftBack);
 		String resultOfRotorMiddleBack = rotors[MIDDLE].encodeLetterBackAfter(resultOfRotorLeftBack, rotors[LEFT].getRotorSetting());
 		System.out.println("resultOfRotorMiddleBack = " + resultOfRotorMiddleBack);
@@ -64,7 +64,7 @@ public class EnigmaI {
 		System.out.println("resultOfRotorRightBack = " + resultOfRotorRightBack);
 		System.out.println("");
 		
-		String resultOfPlugboardBack = plugboard.getConnectionBack(resultOfRotorRightBack);
+		String resultOfPlugboardBack = plugboard.encodeLetter(resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
 		System.out.println("resultOfPlugboardBack = " + resultOfPlugboardBack);
 		System.out.println("");
 		

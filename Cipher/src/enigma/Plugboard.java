@@ -55,4 +55,9 @@ public class Plugboard{
 	private int getPosBack(String letter) {
 		return Arrays.asList(plugboard).indexOf(letter);
 	}
+	
+	public String encodeLetter(String letter, String previousRotorSetting) {
+		int relativePos = (getPos(letter) - getPos(previousRotorSetting));
+		return getConnectionBack(this.alphabet[relativePos]);
+	}
 }

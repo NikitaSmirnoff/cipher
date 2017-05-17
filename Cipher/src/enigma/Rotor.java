@@ -78,7 +78,6 @@ public class Rotor implements RotorInterface{
 
 	public String encodeLetter(String letter) {
 		int relativePos = (getPos(letter) + getPos(this.rotorSetting)) % 26;
-		System.out.println(relativePos);
 		return getConnection(this.alphabet[relativePos]);
 	}
 	
@@ -96,13 +95,18 @@ public class Rotor implements RotorInterface{
 	}
 	
 	public String encodeLetterBack(String letter) {
-		int relativePos = (getPosBack(letter) + getPos(this.rotorSetting)) % 26;
-		return this.alphabet[relativePos];
+		int relativePos = (getPos(letter) + getPos(this.rotorSetting)) % 26;
+		return getConnectionBack(this.alphabet[relativePos]);
 	}
 	
-//	public String getConnectionBack(String letter) {
-//		return this.alphabet[getPosBack(letter)];
-//	}
+	public String encodeLetterBackAfter(String letter, String previousRotorSetting) {
+		int relativePos = ((getPos(letter) + getPos(this.rotorSetting)) % 26) - getPos(previousRotorSetting);
+		return getConnectionBack(this.alphabet[relativePos]);
+	}
+	
+	public String getConnectionBack(String letter) {
+		return this.alphabet[getPosBack(letter)];
+	}
 
 	private int getPosBack(String letter) {
 		return Arrays.asList(rotorWiring).indexOf(letter);
