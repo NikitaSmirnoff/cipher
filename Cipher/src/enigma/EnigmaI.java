@@ -1,5 +1,7 @@
 package enigma;
 
+import java.util.Arrays;
+
 public class EnigmaI {
 
 	public static final int LEFT = 0; 
@@ -17,13 +19,20 @@ public class EnigmaI {
 		rotors[MIDDLE] = new Rotor(r2, rs2);
 		rotors[RIGHT] = new Rotor(r3, rs3);
 		reflector = new Reflector(ref);
-
+		
+		System.out.println("--= Enigma Settings =-- ");
+		System.out.println("");
+		System.out.println("Plugboard: " + Arrays.toString(plugs));
+		System.out.println("Rotors: (" + rs1 + ") (" + rs2 + ") (" + rs3 + ")");
+		System.out.println("         " + r1 + "   " + r2 + "   " + r3);
+		System.out.println("Reflector: UKW-" + ref);
+		System.out.println("");
 	}
 	
 	public static void main(String[] args) {
 		String[] plugs = {"AZ", "XY"};
-		enigma = new EnigmaI(plugs, 1, "D", 2, "B", 3, "R", "B");
-		enigma.encodeChar("A");
+		enigma = new EnigmaI(plugs, 4, "P", 1, "D", 2, "R", "B");
+		enigma.encodePhrase("HELLO MY NAME IS NIKITA");
 	}
 
 	private String encodeChar(String letter) {
@@ -34,46 +43,59 @@ public class EnigmaI {
 		} else {
 			if(rotors[MIDDLE].getRotorSetting().equals(rotors[MIDDLE].getFirstTurnoverNotch())){
 				rotors[MIDDLE].incrementRotorSetting();
-			}
-			if(rotors[MIDDLE].getRotorSetting().equals(rotors[MIDDLE].getSecondTurnoverNotch())){
-				rotors[LEFT].incrementRotorSetting();
+				
+				if(rotors[MIDDLE].getRotorSetting().equals(rotors[MIDDLE].getSecondTurnoverNotch())){
+					rotors[LEFT].incrementRotorSetting();
+				}
 			}
 		}
 		
-		String resultOfPlugboard = plugboard.getConnection(letter);
-		System.out.println("resultOfPlugboard = " + resultOfPlugboard);
-		System.out.println("");
+		String resultOfPlugboard = plugboard.getConnection(letter.toUpperCase());
 		
 		String resultOfRotorRight = rotors[RIGHT].encodeLetter(resultOfPlugboard);
-		System.out.println("resultOfRotorRight = " + resultOfRotorRight);
 		String resultOfRotorMiddle = rotors[MIDDLE].encodeLetterAfter(resultOfRotorRight, rotors[RIGHT].getRotorSetting());
-		System.out.println("resultOfRotorMiddle = " + resultOfRotorMiddle);
 		String resultOfRotorLeft = rotors[LEFT].encodeLetterAfter(resultOfRotorMiddle, rotors[MIDDLE].getRotorSetting());
-		System.out.println("resultOfRotorLeft = " + resultOfRotorLeft);
-		System.out.println("");
 		
 		String resultOfReflector = reflector.encodeLetter(resultOfRotorLeft, rotors[LEFT].getRotorSetting());
-		System.out.println("resultOfReflector = " + resultOfReflector);
-		System.out.println("");
 		
 		String resultOfRotorLeftBack = rotors[LEFT].encodeLetterBack(resultOfReflector);
-		System.out.println("resultOfRotorLeftBack = " + resultOfRotorLeftBack);
 		String resultOfRotorMiddleBack = rotors[MIDDLE].encodeLetterBackAfter(resultOfRotorLeftBack, rotors[LEFT].getRotorSetting());
-		System.out.println("resultOfRotorMiddleBack = " + resultOfRotorMiddleBack);
 		String resultOfRotorRightBack = rotors[RIGHT].encodeLetterBackAfter(resultOfRotorMiddleBack, rotors[MIDDLE].getRotorSetting());
-		System.out.println("resultOfRotorRightBack = " + resultOfRotorRightBack);
-		System.out.println("");
 		
-		String resultOfPlugboardBack = plugboard.encodeLetter(resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
-		System.out.println("resultOfPlugboardBack = " + resultOfPlugboardBack);
-		System.out.println("");
+		String resultOfPlugboardBack = plugboard.encodeLetterBack(resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
+		
+		System.out.println("Rotor Settings: " + rotors[LEFT].getRotorSetting() + rotors[MIDDLE].getRotorSetting() + rotors[RIGHT].getRotorSetting());
+		System.out.println(letter + " | " + resultOfPlugboard + " > " + resultOfRotorRight + " > "
+				 + resultOfRotorMiddle + " > " + resultOfRotorLeft + " > " + resultOfReflector + " > "
+				 + resultOfRotorLeftBack + " > " + resultOfRotorMiddleBack + " > " + resultOfRotorRightBack + " | "
+				 + resultOfPlugboardBack);
 		
 		return resultOfPlugboardBack;
 		
 	}
 	
 	private String encodeWord(String word) {
-		return word;
+		String result = "";
+		
+		for(int i = 0; i < word.length(); i++){
+			result = result + encodeChar(word.substring(i, i + 1));
+		}
+		
+		return result;
+	}
+	
+	private String encodePhrase(String phrase) {
+		String result = "";
+		String[] phraseArray = phrase.split(" ");
+		
+		for(int i = 0; i < phraseArray.length; i++){
+			result = result + encodeWord(phraseArray[i]) + " ";
+		}
+		
+		System.out.println("");
+		System.out.println("Input:  " + phrase.toUpperCase());
+		System.out.println("Output: " + result);
+		return result;
 	}
 
 }

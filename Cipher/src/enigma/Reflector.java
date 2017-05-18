@@ -32,7 +32,7 @@ public class Reflector{
 	}
 	
 	public String encodeLetter(String letter, String previousRotorSetting) {
-		int relativePos = (getPos(letter) - getPos(previousRotorSetting));
+		int relativePos = (getPos(letter) - getPos(previousRotorSetting) + 26) % 26;
 		return getConnection(this.alphabet[relativePos]);
 	}
 

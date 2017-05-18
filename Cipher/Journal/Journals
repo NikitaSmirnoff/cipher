@@ -45,7 +45,7 @@ to the input letter.
 - Debugging
 
 5/16/2017 - Tuesday (2 Periods)
-- Debugging (Almost done)
+- Debugging
 	- Bug in rotors with taking in the relative position of letters from previous inputs. (Fixed, but only forward encoding)
 	- Right rotor doesn't need to take a relative position from the plugboard because the plugboard is already in order.
 
@@ -55,5 +55,13 @@ to the input letter.
 	- (When encoding back) Left rotor doesn't need to take a relative postion from the reflector because the reflector is already in order.
 	- Fixed relative position bug of letters from previous inputs when encoding back.
 	- Relative position encoding back reflector
+	
+5/18/2017 - Thursday (2 Periods)
+- Finished back-end completely. Engima now works with any settings without any errors or bugs.
+	- Added methods encodeWord(); encodePhrase();
+- Added print messages to engima constructor which prints all current settings neatly.
+- Added print messages to all encoding methods to have a clean understanding of every single step of the encoding process.
+- Enigma is now complete.
+- Make a plan for setting up the GUI.
 
 
