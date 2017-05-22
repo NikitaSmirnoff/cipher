@@ -2,7 +2,7 @@ package enigma;
 
 import java.util.Arrays;
 
-public class Rotor implements RotorInterface{
+public class Rotor {
 
 	private String turnoverNotchFirst;
 	private String turnoverNotchSecond;
