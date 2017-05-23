@@ -68,4 +68,7 @@ to the input letter.
 - Removed RotorInterface, as there's no use for it.
 - Make a plan and design the GUI.
 
+5/23/2017 - Tuesday (1 Period)
+- Create window and necessary classes for GUI.
+
 

@@ -32,7 +32,7 @@ public class EnigmaI {
 	public static void main(String[] args) {
 		String[] plugs = {"AZ", "XY"};
 		enigma = new EnigmaI(plugs, 4, "P", 1, "D", 2, "R", "B");
-		enigma.encodePhrase("HELLO MY NAME IS NIKITA");
+		enigma.encodePhrase("aaaaabbbb");
 	}
 
 	private String encodeChar(String letter) {
@@ -65,7 +65,7 @@ public class EnigmaI {
 		String resultOfPlugboardBack = plugboard.encodeLetterBack(resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
 		
 		System.out.println("Rotor Settings: " + rotors[LEFT].getRotorSetting() + rotors[MIDDLE].getRotorSetting() + rotors[RIGHT].getRotorSetting());
-		System.out.println(letter + " | " + resultOfPlugboard + " > " + resultOfRotorRight + " > "
+		System.out.println(letter.toUpperCase() + " | " + resultOfPlugboard + " > " + resultOfRotorRight + " > "
 				 + resultOfRotorMiddle + " > " + resultOfRotorLeft + " > " + resultOfReflector + " > "
 				 + resultOfRotorLeftBack + " > " + resultOfRotorMiddleBack + " > " + resultOfRotorRightBack + " | "
 				 + resultOfPlugboardBack);
