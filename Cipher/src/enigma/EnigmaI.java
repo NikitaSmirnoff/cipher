@@ -65,7 +65,7 @@ public class EnigmaI {
 		String resultOfPlugboardBack = plugboard.encodeLetterBack(resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
 		
 		System.out.println("Rotor Settings: " + rotors[LEFT].getRotorSetting() + rotors[MIDDLE].getRotorSetting() + rotors[RIGHT].getRotorSetting());
-		System.out.println(letter + " | " + resultOfPlugboard + " > " + resultOfRotorRight + " > "
+		System.out.println(letter.toUpperCase() + " | " + resultOfPlugboard + " > " + resultOfRotorRight + " > "
 				 + resultOfRotorMiddle + " > " + resultOfRotorLeft + " > " + resultOfReflector + " > "
 				 + resultOfRotorLeftBack + " > " + resultOfRotorMiddleBack + " > " + resultOfRotorRightBack + " | "
 				 + resultOfPlugboardBack);
