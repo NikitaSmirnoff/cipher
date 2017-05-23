@@ -32,7 +32,7 @@ public class EnigmaI {
 	public static void main(String[] args) {
 		String[] plugs = {"AZ", "XY"};
 		enigma = new EnigmaI(plugs, 4, "P", 1, "D", 2, "R", "B");
-		enigma.encodePhrase("HELLO MY NAME IS NIKITA");
+		enigma.encodePhrase("HELLO WORLD");
 	}
 
 	private String encodeChar(String letter) {
