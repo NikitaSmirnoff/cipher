@@ -71,4 +71,10 @@ to the input letter.
 5/23/2017 - Tuesday (1 Period)
 - Create window and necessary classes for GUI.
 
+5/24/2017 - Wednesday (2 Periods)
+- Took my old code from a simple game I made earlier in order to save time from having to make new classes like
+window, game, handler, keyinput, ID, and GameObject.
+- Made a new class called GUI.
+- GUI draws the layout of the rotors.
+
 

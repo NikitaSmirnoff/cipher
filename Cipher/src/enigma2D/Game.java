@@ -10,12 +10,15 @@ public class Game extends Canvas implements Runnable{
 
 	private static final long serialVersionUID = 6691247796639148462L;
 	
-	public static final int WIDTH = 1280, HEIGHT = WIDTH / 12 * 9;
+	public static final int WIDTH = 1024, HEIGHT = WIDTH / 12 * 9;
 	private Thread thread;
 	private boolean running = false;
 	
 	private Handler handler;
+	private GUI gRotor;
+	
 	private HUD hud;
+	
 	private Random r;
 	
 	public static void main(String[] args) {
@@ -26,15 +29,17 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler(); // Initialize Handler
 		this.addKeyListener(new KeyInput(handler)); // Tell the game to start listening for keys
 		
-		new Window(WIDTH, HEIGHT, "New Game", this); // Create the window with WIDTH and HEIGHT and call it New Game
+		new Window(WIDTH, HEIGHT, "Engima", this); // Create the window with WIDTH and HEIGHT and call it New Game
+		
+		gRotor = new GUI();
 		
 		hud = new HUD();
 		
 		r = new Random();
 		
 		handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player, handler)); // Add player object to the game
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); // Add enemy object to the game
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); // Add enemy object to the game
+//		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); // Add enemy object to the game
+//		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); // Add enemy object to the game
 	}
 
 	public void run(){
@@ -69,7 +74,9 @@ public class Game extends Canvas implements Runnable{
 	
 	private void tick() {
 		handler.tick();
-		hud.tick();
+		gRotor.tick();
+		
+//		hud.tick();
 		
 	}
 	
@@ -82,11 +89,13 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();
 		
-		g.setColor(Color.black);
+		g.setColor(new Color(208, 211, 229)); // Background color
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		handler.render(g);
-		hud.render(g);
+		gRotor.render(g);
+		
+//		hud.render(g);
 		
 		g.dispose();
 		bs.show();
