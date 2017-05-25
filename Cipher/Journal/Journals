@@ -77,4 +77,7 @@ window, game, handler, keyinput, ID, and GameObject.
 - Made a new class called GUI.
 - GUI draws the layout of the rotors.
 
+5/23/2017 - Thursday (1 Period)
+- Made the positioning of the Reflector, rotors, and plugboard proportional and easy to change in the code.
+- Created GRotorLetters class which will be responsible for putting letters on the rotors as objects.
 
