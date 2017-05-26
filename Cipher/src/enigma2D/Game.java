@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
+import enigma.EnigmaI;
+
 public class Game extends Canvas implements Runnable{
 
 	private static final long serialVersionUID = 6691247796639148462L;
@@ -13,13 +15,11 @@ public class Game extends Canvas implements Runnable{
 	public static final int WIDTH = 1024, HEIGHT = WIDTH / 12 * 9;
 	private Thread thread;
 	private boolean running = false;
-	
 	private Handler handler;
-	private GUI gRotor;
-	
+	private GUI gui;
 	private HUD hud;
-	
 	private Random r;
+	public static EnigmaI enigma;
 	
 	public static void main(String[] args) {
 		new Game();
@@ -28,18 +28,22 @@ public class Game extends Canvas implements Runnable{
 	public Game(){
 		handler = new Handler(); // Initialize Handler
 		this.addKeyListener(new KeyInput(handler)); // Tell the game to start listening for keys
-		
 		new Window(WIDTH, HEIGHT, "Engima", this); // Create the window with WIDTH and HEIGHT and call it New Game
 		
-		gRotor = new GUI();
+		String[] plugs = {"AZ", "XY"};
+		enigma = new EnigmaI(plugs, 4, "P", 1, "D", 2, "R", "B");
+		enigma.encodePhrase("HELLO WORLD");
+		
+		gui = new GUI();
 		
 		hud = new HUD();
 		
 		r = new Random();
 		
-		handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player, handler)); // Add player object to the game
+//		handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player, handler)); // Add player object to the game
 //		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); // Add enemy object to the game
-//		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); // Add enemy object to the game
+		handler.addObject(new GLetter(GUI.getRightRotorX(), GUI.getRotorY(), ID.Letter, "A", handler));
+		handler.addObject(new GLetter(GUI.getRightRotorX(), GUI.getRotorY() + 20, ID.Letter, "B", handler));
 	}
 
 	public void run(){
@@ -74,7 +78,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private void tick() {
 		handler.tick();
-		gRotor.tick();
+		gui.tick();
 		
 //		hud.tick();
 		
@@ -92,8 +96,10 @@ public class Game extends Canvas implements Runnable{
 		g.setColor(new Color(247, 247, 247)); // Background color
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
+		if(gui != null){
+			gui.render(g);
+		}
 		handler.render(g);
-		gRotor.render(g);
 		
 //		hud.render(g);
 		

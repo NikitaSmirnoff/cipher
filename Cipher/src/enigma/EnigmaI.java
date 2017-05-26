@@ -30,9 +30,9 @@ public class EnigmaI {
 	}
 	
 	public static void main(String[] args) {
-		String[] plugs = {"AZ", "XY"};
-		enigma = new EnigmaI(plugs, 4, "P", 1, "D", 2, "R", "B");
-		enigma.encodePhrase("HELLO WORLD");
+//		String[] plugs = {"AZ", "XY"};
+//		enigma = new EnigmaI(plugs, 4, "P", 1, "D", 2, "R", "B");
+//		enigma.encodePhrase("HELLO WORLD");
 	}
 
 	private String encodeChar(String letter) {
@@ -84,7 +84,7 @@ public class EnigmaI {
 		return result;
 	}
 	
-	private String encodePhrase(String phrase) {
+	public String encodePhrase(String phrase) {
 		String result = "";
 		String[] phraseArray = phrase.split(" ");
 		

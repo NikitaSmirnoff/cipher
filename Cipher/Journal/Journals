@@ -77,7 +77,15 @@ window, game, handler, keyinput, ID, and GameObject.
 - Made a new class called GUI.
 - GUI draws the layout of the rotors.
 
-5/23/2017 - Thursday (1 Period)
+5/25/2017 - Thursday (1 Period)
 - Made the positioning of the Reflector, rotors, and plugboard proportional and easy to change in the code.
 - Created GRotorLetters class which will be responsible for putting letters on the rotors as objects.
+
+5/26/2017 - Friday (2 Periods)
+- Added getters and setters to the GUI in order to place letter objects according to the gui size
+- Renamed GRotorLetters to GLetter
+- GLetter will take in an x and y postion, and the letter. The letter will be placed at the x and y position.
+The background of the box the letter is in will change based on the boolean called "result", result is true when
+it appears to be a result of its specific rotor.
+- Successfully placed a single letter on a rotor.
 
