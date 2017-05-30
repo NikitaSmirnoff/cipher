@@ -24,6 +24,7 @@ public class GLetter extends GameObject{
 	public boolean position = false;
 	public Handler handler;
 	public EnigmaI enigma;
+	public Color resultColor;
 	
 	public GLetter(int x, int y, int side, int part, ID id, String letter, Handler handler, EnigmaI enigma){
 		super(x, y, id);
@@ -37,11 +38,141 @@ public class GLetter extends GameObject{
 	}
 	
 	public void tick(){
+		if(this.part == PLUGBOARD){
+			if(this.side == RIGHT){
+				if(enigma.getInput().equals(letter)){
+					result = true;
+					resultColor = Color.RED;
+				} else {
+					if(enigma.getResultOfPlugboardBack().equals(letter)){
+						result = true;
+						resultColor = Color.GREEN;
+					} else {
+						result = false;
+					}
+				}
+				
+			}
+			if(this.side == LEFT){
+				if(enigma.getResultOfPlugboard().equals(letter)){
+					result = true;
+					resultColor = Color.RED;
+				} else {
+					if(enigma.getInputOfPlugboardBack().equals(letter)){
+						result = true;
+						resultColor = Color.GREEN;
+					} else {
+						result = false;
+					}
+				}
+				
+			}
+		}
+		
 		if(this.part == LEFT || this.part == MIDDLE || this.part == RIGHT){
-			if(enigma.getRotors(this.part).getRotorSetting().equals(letter) && this.side == RIGHT){
-				position = true;
-			} else {
-				position = false;
+			if(this.side == RIGHT){
+				if(enigma.getRotors(this.part).getRotorSetting().equals(letter)){
+					position = true;
+				} else {
+					position = false;
+				}
+				if(this.part == RIGHT){
+					if(enigma.getInputOfRotorRight().equals(letter)){
+						result = true;
+						resultColor = Color.RED;
+					} else {
+						if(enigma.getResultOfRotorRightBack().equals(letter)){
+							result = true;
+							resultColor = Color.GREEN;
+						} else {
+							result = false;
+						}
+					}
+				}
+				if(this.part == MIDDLE){
+					if(enigma.getInputOfRotorMiddle().equals(letter)){
+						result = true;
+						resultColor = Color.RED;
+					} else {
+						if(enigma.getResultOfRotorMiddleBack().equals(letter)){
+							result = true;
+							resultColor = Color.GREEN;
+						} else {
+							result = false;
+						}
+					}
+				}
+				if(this.part == LEFT){
+					if(enigma.getInputOfRotorLeft().equals(letter)){
+						result = true;
+						resultColor = Color.RED;
+					} else {
+						if(enigma.getResultOfRotorLeftBack().equals(letter)){
+							result = true;
+							resultColor = Color.GREEN;
+						} else {
+							result = false;
+						}
+					}
+				}
+			}
+			
+			if(this.side == LEFT){
+				if(this.part == RIGHT){
+					if(enigma.getResultOfRotorRight().equals(letter)){
+						result = true;
+						resultColor = Color.RED;
+					} else {
+						if(enigma.getInputOfRotorRightBack().equals(letter)){
+							result = true;
+							resultColor = Color.GREEN;
+						} else {
+							result = false;
+						}
+					}
+				}
+				if(this.part == MIDDLE){
+					if(enigma.getResultOfRotorMiddle().equals(letter)){
+						result = true;
+						resultColor = Color.RED;
+					} else {
+						if(enigma.getInputOfRotorMiddleBack().equals(letter)){
+							result = true;
+							resultColor = Color.GREEN;
+						} else {
+							result = false;
+						}
+					}
+				}
+				if(this.part == LEFT){
+					if(enigma.getResultOfRotorLeft().equals(letter)){
+						result = true;
+						resultColor = Color.RED;
+					} else {
+						if(enigma.getInputOfRotorLeftBack().equals(letter)){
+							result = true;
+							resultColor = Color.GREEN;
+						} else {
+							result = false;
+						}
+					}
+				}
+			}
+		}
+		
+		if(this.part == REFLECTOR){
+			if(this.side == RIGHT){
+				if(enigma.getInputOfReflector().equals(letter)){
+					result = true;
+					resultColor = Color.RED;
+				} else {
+					if(enigma.getResultOfReflector().equals(letter)){
+						result = true;
+						resultColor = Color.GREEN;
+					} else {
+						result = false;
+					}
+				}
 			}
 		}
 	}
@@ -49,19 +180,16 @@ public class GLetter extends GameObject{
 	public void render(Graphics g){
 		
 		if(result){
-			g.setColor(Color.RED); 									// Background if a result
+			g.setColor(resultColor); 									// Background if the letter is a part of the encryption
 			g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
 		} else {
-			g.setColor(new Color(237, 237, 237)); 					// Background
-			g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
-		}
-		
-		if(position){
-			g.setColor(new Color(207, 207, 207)); 					// Background if a position
-			g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
-		} else {
-			g.setColor(new Color(237, 237, 237)); 					// Background
-			g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
+			if(position){
+				g.setColor(new Color(207, 207, 207)); 					// Background if the letter is the rotor's current position
+				g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
+			} else {
+				g.setColor(new Color(247, 247, 247)); 					// Background
+				g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
+			}
 		}
 		
 		g.setColor(Color.BLACK); 									// Border

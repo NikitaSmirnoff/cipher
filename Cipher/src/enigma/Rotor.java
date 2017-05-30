@@ -111,6 +111,16 @@ public class Rotor {
 	private int getPosBack(String letter) {
 		return Arrays.asList(rotorWiring).indexOf(letter);
 	}
+	
+	public String getEncodeInput(String letter){
+		int relativePos = (getPos(letter) + getPos(this.rotorSetting) + 26) % 26;
+		return this.alphabet[relativePos];
+	}
+	
+	public String getEncodeAfterInput(String letter, String previousRotorSetting){
+		int relativePos = (((getPos(letter) + getPos(this.rotorSetting) + 26) % 26) - getPos(previousRotorSetting) + 26) % 26;
+		return this.alphabet[relativePos];
+	}
 
 	
 

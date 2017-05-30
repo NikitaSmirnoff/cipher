@@ -12,6 +12,30 @@ public class EnigmaI {
 	public static Plugboard plugboard;
 	public static Reflector reflector;
 	public static EnigmaI enigma;
+	
+	// Encryption Results
+	public String input;
+	public String resultOfPlugboard;
+	
+	public String inputOfRotorRight;
+	public String resultOfRotorRight;
+	public String inputOfRotorMiddle;
+	public String resultOfRotorMiddle;
+	public String inputOfRotorLeft;
+	public String resultOfRotorLeft;
+	
+	public String inputOfReflector;
+	public String resultOfReflector;
+	
+	public String inputOfRotorLeftBack;
+	public String resultOfRotorLeftBack;
+	public String inputOfRotorMiddleBack;
+	public String resultOfRotorMiddleBack;
+	public String inputOfRotorRightBack;
+	public String resultOfRotorRightBack;
+	
+	public String inputOfPlugboardBack;
+	public String resultOfPlugboardBack;
 
 	public EnigmaI(String[] plugs, int r1, String rs1, int r2, String rs2, int r3, String rs3, String ref) {
 		plugboard = new Plugboard(plugs);
@@ -50,25 +74,34 @@ public class EnigmaI {
 			}
 		}
 		
-		String resultOfPlugboard = plugboard.getConnection(letter.toUpperCase());
+		this.input = letter;
+		this.resultOfPlugboard = plugboard.getConnection(input.toUpperCase());
 		
-		String resultOfRotorRight = rotors[RIGHT].encodeLetter(resultOfPlugboard);
-		String resultOfRotorMiddle = rotors[MIDDLE].encodeLetterAfter(resultOfRotorRight, rotors[RIGHT].getRotorSetting());
-		String resultOfRotorLeft = rotors[LEFT].encodeLetterAfter(resultOfRotorMiddle, rotors[MIDDLE].getRotorSetting());
+		this.inputOfRotorRight = rotors[RIGHT].getEncodeInput(this.resultOfPlugboard);
+		this.resultOfRotorRight = rotors[RIGHT].encodeLetter(this.resultOfPlugboard);
+		this.inputOfRotorMiddle = rotors[MIDDLE].getEncodeAfterInput(this.resultOfRotorRight, rotors[RIGHT].getRotorSetting());
+		this.resultOfRotorMiddle = rotors[MIDDLE].encodeLetterAfter(this.resultOfRotorRight, rotors[RIGHT].getRotorSetting());
+		this.inputOfRotorLeft = rotors[LEFT].getEncodeAfterInput(this.resultOfRotorMiddle, rotors[MIDDLE].getRotorSetting());
+		this.resultOfRotorLeft = rotors[LEFT].encodeLetterAfter(this.resultOfRotorMiddle, rotors[MIDDLE].getRotorSetting());
 		
-		String resultOfReflector = reflector.encodeLetter(resultOfRotorLeft, rotors[LEFT].getRotorSetting());
+		this.inputOfReflector = reflector.getEncodeAfterInput(this.resultOfRotorLeft, rotors[LEFT].getRotorSetting());
+		this.resultOfReflector = reflector.encodeLetter(this.resultOfRotorLeft, rotors[LEFT].getRotorSetting());
 		
-		String resultOfRotorLeftBack = rotors[LEFT].encodeLetterBack(resultOfReflector);
-		String resultOfRotorMiddleBack = rotors[MIDDLE].encodeLetterBackAfter(resultOfRotorLeftBack, rotors[LEFT].getRotorSetting());
-		String resultOfRotorRightBack = rotors[RIGHT].encodeLetterBackAfter(resultOfRotorMiddleBack, rotors[MIDDLE].getRotorSetting());
+		this.inputOfRotorLeftBack = rotors[LEFT].getEncodeInput(this.resultOfReflector);
+		this.resultOfRotorLeftBack = rotors[LEFT].encodeLetterBack(this.resultOfReflector);
+		this.inputOfRotorMiddleBack = rotors[MIDDLE].getEncodeAfterInput(this.resultOfRotorLeftBack, rotors[LEFT].getRotorSetting());
+		this.resultOfRotorMiddleBack = rotors[MIDDLE].encodeLetterBackAfter(this.resultOfRotorLeftBack, rotors[LEFT].getRotorSetting());
+		this.inputOfRotorRightBack = rotors[RIGHT].getEncodeAfterInput(this.resultOfRotorMiddleBack, rotors[MIDDLE].getRotorSetting());
+		this.resultOfRotorRightBack = rotors[RIGHT].encodeLetterBackAfter(this.resultOfRotorMiddleBack, rotors[MIDDLE].getRotorSetting());
 		
-		String resultOfPlugboardBack = plugboard.encodeLetterBack(resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
+		this.inputOfPlugboardBack = plugboard.getEncodeAfterInput(this.resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
+		this.resultOfPlugboardBack = plugboard.encodeLetterBack(this.resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
 		
 		System.out.println("Rotor Settings: " + rotors[LEFT].getRotorSetting() + rotors[MIDDLE].getRotorSetting() + rotors[RIGHT].getRotorSetting());
-		System.out.println(letter.toUpperCase() + " | " + resultOfPlugboard + " > " + resultOfRotorRight + " > "
-				 + resultOfRotorMiddle + " > " + resultOfRotorLeft + " > " + resultOfReflector + " > "
-				 + resultOfRotorLeftBack + " > " + resultOfRotorMiddleBack + " > " + resultOfRotorRightBack + " | "
-				 + resultOfPlugboardBack);
+		System.out.println(letter.toUpperCase() + " > " + resultOfPlugboard + " | " + inputOfRotorRight + " > " + resultOfRotorRight + " > "
+				 + inputOfRotorMiddle + " > " + resultOfRotorMiddle + " > " + inputOfRotorLeft + " > " + resultOfRotorLeft + " > " + inputOfReflector + " > " + resultOfReflector + " > "
+				 + inputOfRotorLeftBack + " > " + resultOfRotorLeftBack + " > " + inputOfRotorMiddleBack + " > " + resultOfRotorMiddleBack + " > " + inputOfRotorRightBack + " > " + resultOfRotorRightBack + " | "
+				 + inputOfPlugboardBack + " > " + resultOfPlugboardBack);
 		
 		return resultOfPlugboardBack;
 		
@@ -128,6 +161,78 @@ public class EnigmaI {
 
 	public void setEnigma(EnigmaI enigma) {
 		this.enigma = enigma;
+	}
+
+	public String getInput() {
+		return this.input;
+	}
+
+	public String getResultOfPlugboard() {
+		return this.resultOfPlugboard;
+	}
+
+	public String getInputOfRotorRight() {
+		return this.inputOfRotorRight;
+	}
+
+	public String getResultOfRotorRight() {
+		return this.resultOfRotorRight;
+	}
+
+	public String getInputOfRotorMiddle() {
+		return this.inputOfRotorMiddle;
+	}
+
+	public String getResultOfRotorMiddle() {
+		return this.resultOfRotorMiddle;
+	}
+
+	public String getInputOfRotorLeft() {
+		return this.inputOfRotorLeft;
+	}
+
+	public String getResultOfRotorLeft() {
+		return this.resultOfRotorLeft;
+	}
+
+	public String getInputOfReflector() {
+		return this.inputOfReflector;
+	}
+
+	public String getResultOfReflector() {
+		return this.resultOfReflector;
+	}
+
+	public String getInputOfRotorLeftBack() {
+		return this.inputOfRotorLeftBack;
+	}
+
+	public String getResultOfRotorLeftBack() {
+		return this.resultOfRotorLeftBack;
+	}
+
+	public String getInputOfRotorMiddleBack() {
+		return this.inputOfRotorMiddleBack;
+	}
+
+	public String getResultOfRotorMiddleBack() {
+		return this.resultOfRotorMiddleBack;
+	}
+
+	public String getInputOfRotorRightBack() {
+		return this.inputOfRotorRightBack;
+	}
+
+	public String getResultOfRotorRightBack() {
+		return this.resultOfRotorRightBack;
+	}
+
+	public String getInputOfPlugboardBack() {
+		return this.inputOfPlugboardBack;
+	}
+
+	public String getResultOfPlugboardBack() {
+		return this.resultOfPlugboardBack;
 	}
 	
 	

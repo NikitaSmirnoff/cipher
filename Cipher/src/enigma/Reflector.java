@@ -43,5 +43,10 @@ public class Reflector{
 	private int getPos(String letter) {
 		return Arrays.asList(alphabet).indexOf(letter);
 	}
+	
+	public String getEncodeAfterInput(String letter, String previousRotorSetting){
+		int relativePos = (getPos(letter) - getPos(previousRotorSetting) + 26) % 26;
+		return this.alphabet[relativePos];
+	}
 
 }

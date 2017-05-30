@@ -43,7 +43,7 @@ public class Game extends Canvas implements Runnable{
 		new Window(WIDTH, HEIGHT, "Engima", this); // Create the window with WIDTH and HEIGHT and call it New Game
 		
 		String[] plugs = {"AZ", "XY"};
-		enigma = new EnigmaI(plugs, 4, "P", 1, "D", 2, "R", "B");
+		enigma = new EnigmaI(plugs, 1, "P", 2, "D", 3, "R", "B");
 		enigma.encodePhrase("C");
 		
 		gui = new GUI();
@@ -61,21 +61,21 @@ public class Game extends Canvas implements Runnable{
 			handler.addObject(new GLetter(GUI.getReflectorX() + GUI.getReflectorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getReflectorY() + ((GUI.getReflectorHEIGHT() / 26) * i),
 					RIGHT, REFLECTOR, ID.Letter, alphabet[i], handler, enigma));
 			
-			// Left Rotor
+			// Left Rotor enigma.getRotors(LEFT).getRotorWiring()[i]
 			handler.addObject(new GLetter(GUI.getLeftRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
-					LEFT, LEFT, ID.Letter, enigma.getRotors(LEFT).getRotorWiring()[i], handler, enigma));
+					LEFT, LEFT, ID.Letter, alphabet[i], handler, enigma));
 			handler.addObject(new GLetter(GUI.getLeftRotorX() + GUI.getRotorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
 					RIGHT, LEFT, ID.Letter, alphabet[i], handler, enigma));
 			
 			// Middle Rotor
 			handler.addObject(new GLetter(GUI.getMiddleRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
-					LEFT, MIDDLE, ID.Letter, enigma.getRotors(MIDDLE).getRotorWiring()[i], handler, enigma));
+					LEFT, MIDDLE, ID.Letter, alphabet[i], handler, enigma));
 			handler.addObject(new GLetter(GUI.getMiddleRotorX() + GUI.getRotorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
 					RIGHT, MIDDLE, ID.Letter, alphabet[i], handler, enigma));
 			
 			// Right Rotor
 			handler.addObject(new GLetter(GUI.getRightRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
-					LEFT, RIGHT, ID.Letter, enigma.getRotors(RIGHT).getRotorWiring()[i], handler, enigma));
+					LEFT, RIGHT, ID.Letter, alphabet[i], handler, enigma));
 			handler.addObject(new GLetter(GUI.getRightRotorX() + GUI.getRotorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
 					RIGHT, RIGHT, ID.Letter, alphabet[i], handler, enigma));
 			
@@ -134,7 +134,7 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();
 		
-		g.setColor(new Color(247, 247, 247)); // Background color
+		g.setColor(new Color(255, 255, 255)); // Background color
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		if(gui != null){
