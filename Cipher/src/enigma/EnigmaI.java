@@ -98,4 +98,38 @@ public class EnigmaI {
 		return result;
 	}
 
+	public Rotor getRotors(int rotor) {
+		return this.rotors[rotor];
+	}
+
+	public void setRotors(Rotor[] rotors) {
+		this.rotors = rotors;
+	}
+
+	public Plugboard getPlugboard() {
+		return this.plugboard;
+	}
+
+	public void setPlugboard(Plugboard plugboard) {
+		this.plugboard = plugboard;
+	}
+
+	public Reflector getReflector() {
+		return this.reflector;
+	}
+
+	public void setReflector(Reflector reflector) {
+		this.reflector = reflector;
+	}
+
+	public EnigmaI getEnigma() {
+		return this.enigma;
+	}
+
+	public void setEnigma(EnigmaI enigma) {
+		this.enigma = enigma;
+	}
+	
+	
+
 }

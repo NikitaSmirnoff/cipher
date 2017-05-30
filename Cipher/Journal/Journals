@@ -89,3 +89,11 @@ The background of the box the letter is in will change based on the boolean call
 it appears to be a result of its specific rotor.
 - Successfully placed a single letter on a rotor.
 
+5/30/2017 - Tuesday (2 Periods)
+- Made for loops and placed all required letters on all the rotors. All positions are relative to the GUI size so nothing is
+fixed to a specific coordinate. That way the size of the screen and GUI can be easily adjusted without the complications of
+repositioning every single letter again.
+- GLetter now has to take in a copy of enigma to take information of rotor, plugboard, and reflector positions, as well as the
+results that they produce during encryption.
+- Successfully made letter highlight based on the current rotor position.
+

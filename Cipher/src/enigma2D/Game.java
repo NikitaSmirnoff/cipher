@@ -12,13 +12,25 @@ public class Game extends Canvas implements Runnable{
 
 	private static final long serialVersionUID = 6691247796639148462L;
 	
+	public static final int LEFT = 0;
+	public static final int MIDDLE = 1;
+	public static final int RIGHT = 2;
+	public static final int REFLECTOR = 3;
+	public static final int PLUGBOARD = 4;
+	
 	public static final int WIDTH = 1024, HEIGHT = WIDTH / 12 * 9;
+	
+	private String[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+	
 	private Thread thread;
 	private boolean running = false;
+	
 	private Handler handler;
 	private GUI gui;
 	private HUD hud;
+	
 	private Random r;
+	
 	public static EnigmaI enigma;
 	
 	public static void main(String[] args) {
@@ -32,7 +44,7 @@ public class Game extends Canvas implements Runnable{
 		
 		String[] plugs = {"AZ", "XY"};
 		enigma = new EnigmaI(plugs, 4, "P", 1, "D", 2, "R", "B");
-		enigma.encodePhrase("HELLO WORLD");
+		enigma.encodePhrase("C");
 		
 		gui = new GUI();
 		
@@ -42,8 +54,37 @@ public class Game extends Canvas implements Runnable{
 		
 //		handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player, handler)); // Add player object to the game
 //		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); // Add enemy object to the game
-		handler.addObject(new GLetter(GUI.getRightRotorX(), GUI.getRotorY(), ID.Letter, "A", handler));
-		handler.addObject(new GLetter(GUI.getRightRotorX(), GUI.getRotorY() + 20, ID.Letter, "B", handler));
+		
+		// Add all letter objects onto the Reflector, Rotors, and Plugboard.
+		for(int i = 0; i < 26; i++){
+			// Reflector
+			handler.addObject(new GLetter(GUI.getReflectorX() + GUI.getReflectorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getReflectorY() + ((GUI.getReflectorHEIGHT() / 26) * i),
+					RIGHT, REFLECTOR, ID.Letter, alphabet[i], handler, enigma));
+			
+			// Left Rotor
+			handler.addObject(new GLetter(GUI.getLeftRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
+					LEFT, LEFT, ID.Letter, enigma.getRotors(LEFT).getRotorWiring()[i], handler, enigma));
+			handler.addObject(new GLetter(GUI.getLeftRotorX() + GUI.getRotorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
+					RIGHT, LEFT, ID.Letter, alphabet[i], handler, enigma));
+			
+			// Middle Rotor
+			handler.addObject(new GLetter(GUI.getMiddleRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
+					LEFT, MIDDLE, ID.Letter, enigma.getRotors(MIDDLE).getRotorWiring()[i], handler, enigma));
+			handler.addObject(new GLetter(GUI.getMiddleRotorX() + GUI.getRotorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
+					RIGHT, MIDDLE, ID.Letter, alphabet[i], handler, enigma));
+			
+			// Right Rotor
+			handler.addObject(new GLetter(GUI.getRightRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
+					LEFT, RIGHT, ID.Letter, enigma.getRotors(RIGHT).getRotorWiring()[i], handler, enigma));
+			handler.addObject(new GLetter(GUI.getRightRotorX() + GUI.getRotorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
+					RIGHT, RIGHT, ID.Letter, alphabet[i], handler, enigma));
+			
+			// Plugboard
+			handler.addObject(new GLetter(GUI.getPlugboardX(), GUI.getPlugboardY() + ((GUI.getPlugboardHEIGHT() / 26) * i),
+					LEFT, PLUGBOARD, ID.Letter, enigma.getPlugboard().getPlugboard()[i], handler, enigma));
+			handler.addObject(new GLetter(GUI.getPlugboardX() + GUI.getPlugboardWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getPlugboardY() + ((GUI.getPlugboardHEIGHT() / 26) * i),
+					RIGHT, PLUGBOARD, ID.Letter, alphabet[i], handler, enigma));
+		}
 	}
 
 	public void run(){
