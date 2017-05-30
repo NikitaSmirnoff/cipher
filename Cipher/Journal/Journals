@@ -96,4 +96,5 @@ repositioning every single letter again.
 - GLetter now has to take in a copy of enigma to take information of rotor, plugboard, and reflector positions, as well as the
 results that they produce during encryption.
 - Successfully made letter highlight based on the current rotor position.
+- Successfully made letters highlight during encryption of an inputed letter.
 
