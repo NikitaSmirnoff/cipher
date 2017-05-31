@@ -1,9 +1,12 @@
 package enigma2D;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
 import enigma.EnigmaI;
 
@@ -202,7 +205,88 @@ public class GLetter extends GameObject{
 		if(this.side == RIGHT){
 			g.drawString(this.letter, this.x + ((GUI.getLetterBoxWIDTH() / 10) * 2), this.y + (GUI.getRotorHEIGHT() / 32));
 		}
+		connectLetters(g);
 		
+	}
+	
+	private void connectLetters(Graphics g){
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
+		for(int i = 0; i < handler.object.size(); i++){
+			GLetter tempObject = (GLetter) handler.object.get(i);
+			
+			if(tempObject.getID() == ID.Letter){
+				if(this.side == RIGHT && tempObject.getSide() == LEFT){
+					if(this.part == RIGHT && tempObject.getPart() == RIGHT){
+						if((enigma.getInputOfRotorRight().equals(this.letter) && enigma.getResultOfRotorRight().equals(tempObject.getLetter())) 
+							|| (enigma.getResultOfRotorRightBack().equals(this.letter) && enigma.getInputOfRotorRightBack().equals(tempObject.getLetter()))){
+							drawRotorLine(Color.BLACK, 3, g, tempObject);
+						}
+						if(enigma.getRotors(RIGHT).getConnection(this.letter).equals(tempObject.getLetter())){
+							drawRotorLine(Color.GRAY, 1, g, tempObject);
+						}
+					}
+					if(this.part == MIDDLE && tempObject.getPart() == MIDDLE){
+						if((enigma.getInputOfRotorMiddle().equals(this.letter) && enigma.getResultOfRotorMiddle().equals(tempObject.getLetter()))  
+							|| (enigma.getResultOfRotorMiddleBack().equals(this.letter) && enigma.getInputOfRotorMiddleBack().equals(tempObject.getLetter()))){
+							drawRotorLine(Color.BLACK, 3, g, tempObject);
+						}
+						if(enigma.getRotors(MIDDLE).getConnection(this.letter).equals(tempObject.getLetter())){
+							drawRotorLine(Color.GRAY, 1, g, tempObject);
+						}
+					}
+					if(this.part == LEFT && tempObject.getPart() == LEFT){
+						if((enigma.getInputOfRotorLeft().equals(this.letter) && enigma.getResultOfRotorLeft().equals(tempObject.getLetter())) 
+							|| (enigma.getResultOfRotorLeftBack().equals(this.letter) && enigma.getInputOfRotorLeftBack().equals(tempObject.getLetter()))){
+							drawRotorLine(Color.BLACK, 3, g, tempObject);
+						}
+						if(enigma.getRotors(LEFT).getConnection(this.letter).equals(tempObject.getLetter())){
+							drawRotorLine(Color.GRAY, 1, g, tempObject);
+						}
+					}
+				}
+				
+				if(this.side == RIGHT && tempObject.getSide() == RIGHT){
+					if(this.part == REFLECTOR && tempObject.getPart() == REFLECTOR){
+						if(enigma.getInputOfReflector().equals(tempObject.getLetter()) && enigma.getResultOfReflector().equals(this.letter)){
+							drawReflectorLine(Color.BLACK, 3, g, tempObject);
+						}
+						if(enigma.getReflector().getPos(tempObject.getLetter()) > enigma.getReflector().getPos(this.letter) && enigma.getReflector().getConnection(this.letter).equals(tempObject.getLetter())){
+							drawReflectorLine(Color.GRAY, 1, g, tempObject);
+						}
+					}
+				}
+			}
+		}
+		
+		g2.setStroke(new BasicStroke(1));
+	}
+	
+	public void drawRotorLine(Color color, int thickness, Graphics g, GLetter tempObject){
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(thickness));
+		g.setColor(color);
+		
+		g.drawLine(this.x - (GUI.getRotorWIDTH() - (GUI.getLetterBoxWIDTH() * 2)) / 8, this.y + (GUI.getRotorHEIGHT() / 52),
+				this.x - (GUI.getRotorWIDTH() - (GUI.getLetterBoxWIDTH() * 2)) / 4, this.y + (GUI.getRotorHEIGHT() / 52));
+		g.drawLine(this.x - (GUI.getRotorWIDTH() - (GUI.getLetterBoxWIDTH() * 2)) / 4, this.y + (GUI.getRotorHEIGHT() / 52), 
+				tempObject.getX() + GUI.getLetterBoxWIDTH() + (GUI.getRotorWIDTH() - (GUI.getLetterBoxWIDTH() * 2)) / 4, tempObject.getY() + (GUI.getRotorHEIGHT() / 52));
+		g.drawLine(tempObject.getX() + GUI.getLetterBoxWIDTH() + (GUI.getRotorWIDTH() - (GUI.getLetterBoxWIDTH() * 2)) / 4, tempObject.getY() + (GUI.getRotorHEIGHT() / 52), 
+				tempObject.getX() + GUI.getLetterBoxWIDTH() + (GUI.getRotorWIDTH() - (GUI.getLetterBoxWIDTH() * 2)) / 8, tempObject.getY() + (GUI.getRotorHEIGHT() / 52));
+	}
+	
+	public void drawReflectorLine(Color color, int thickness, Graphics g, GLetter tempObject){
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(thickness));
+		g.setColor(color);
+		
+		g.drawLine(this.x - (GUI.getReflectorWIDTH() - GUI.getLetterBoxWIDTH()) / 26 , this.y + (GUI.getReflectorHEIGHT() / 52),
+				this.x - ((GUI.getReflectorWIDTH() - GUI.getLetterBoxWIDTH()) / 13) * ((enigma.getReflector().getPos(this.letter) % 13) + 1), this.y + (GUI.getReflectorHEIGHT() / 52));
+		g.drawLine(this.x - ((GUI.getReflectorWIDTH() - GUI.getLetterBoxWIDTH()) / 13) * ((enigma.getReflector().getPos(this.letter) % 13) + 1), this.y + (GUI.getReflectorHEIGHT() / 52), 
+				tempObject.getX() - ((GUI.getReflectorWIDTH() - GUI.getLetterBoxWIDTH()) / 13) * ((enigma.getReflector().getPos(this.letter) % 13) + 1), tempObject.getY() + (GUI.getReflectorHEIGHT() / 52));
+		g.drawLine(tempObject.getX() - ((GUI.getReflectorWIDTH() - GUI.getLetterBoxWIDTH()) / 13) * ((enigma.getReflector().getPos(this.letter) % 13) + 1), tempObject.getY() + (GUI.getReflectorHEIGHT() / 52), 
+				tempObject.getX() - (GUI.getReflectorWIDTH() - GUI.getLetterBoxWIDTH()) / 26, tempObject.getY() + (GUI.getReflectorHEIGHT() / 52));
 	}
 	
 	public String getLetter(){
@@ -219,6 +303,26 @@ public class GLetter extends GameObject{
 
 	public void setResult(boolean result) {
 		this.result = result;
+	}
+
+	public int getX() {
+		return this.x;
+	}
+
+	public int getY() {
+		return this.y;
+	}
+
+	public int getSide() {
+		return this.side;
+	}
+
+	public int getPart() {
+		return this.part;
+	}
+
+	public boolean isPosition() {
+		return this.position;
 	}
 
 	public Rectangle getBounds() {

@@ -96,5 +96,9 @@ repositioning every single letter again.
 - GLetter now has to take in a copy of enigma to take information of rotor, plugboard, and reflector positions, as well as the
 results that they produce during encryption.
 - Successfully made letter highlight based on the current rotor position.
-- Successfully made letters highlight during encryption of an inputed letter.
+- (At Home) Successfully made letters highlight during encryption of an inputed letter. Red for foward encryption and green for back.
+- (At Home) Rotors now display a neat thin gray triple line to its connection, all specific to their rotor types and positions. The line is
+made thicker and black if part of the encryption of the inputed letter.
+- (At Home) Reflector now display a neat thin gray triple line to its connection, all specific to its reflector type. The line is
+made thicker and black if part of the encryption of the inputed letter.
 
