@@ -102,3 +102,8 @@ made thicker and black if part of the encryption of the inputed letter.
 - (At Home) Reflector now display a neat thin gray triple line to its connection, all specific to its reflector type. The line is
 made thicker and black if part of the encryption of the inputed letter.
 
+5/31/2017 - Wednesday (1 Period)
+- GLetters part of the rotors don't just get created in a standard for loop anymore, they are now created starting from each rotor's
+current rotor position. That way the GLetter rotor position is always fixed to the top of its rotor.
+- Started JPanel inside the Window class for a text field and buttons that would change each enigma setting. But can't get jPanel to be on the screen
+at the same time as enigma.
