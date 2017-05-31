@@ -90,7 +90,7 @@ public class Rotor {
 		return this.rotorWiring[getPos(letter)];
 	}
 
-	private int getPos(String letter) {
+	public int getPos(String letter) {
 		return Arrays.asList(alphabet).indexOf(letter);
 	}
 	
