@@ -107,3 +107,7 @@ made thicker and black if part of the encryption of the inputed letter.
 current rotor position. That way the GLetter rotor position is always fixed to the top of its rotor.
 - Started JPanel inside the Window class for a text field and buttons that would change each enigma setting. But can't get jPanel to be on the screen
 at the same time as enigma.
+
+6/1/2017 - Thursday (2 Periods)
+- Added the JPanel into a ContentPane and made the contentPane (Which includes the text field) show up on the bottom of the screen.
+Which will be used to input letters/phrases for encryption.

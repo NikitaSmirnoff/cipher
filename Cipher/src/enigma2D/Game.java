@@ -2,6 +2,7 @@ package enigma2D;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -39,6 +40,11 @@ public class Game extends Canvas implements Runnable{
 	public static void main(String[] args) {
 		new Game();
 	}
+	
+//	@Override
+//	public Dimension getPreferredSize(){
+//		return new Dimension(1024, 600);
+//	}
 	
 	public Game(){
 		handler = new Handler(); // Initialize Handler
