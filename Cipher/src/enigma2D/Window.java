@@ -11,6 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -21,6 +22,9 @@ public class Window extends Canvas{
 	private static final long serialVersionUID = -7210508713407496964L;
 	public static JTextField inputField;
 	public static JTextField outputField;
+	public static JComboBox leftRotor;
+	public static JComboBox middleRotor;
+	public static JComboBox rightRotor;
 
 	public Window(int width, int height, String title, Game game){
 		JFrame frame = new JFrame(title);
@@ -56,7 +60,12 @@ public class Window extends Canvas{
 			  
 		});
 		outputField = new JTextField("", 60);
-//		outputField.setEditable(false);
+		outputField.setEditable(false);
+		String[] rotorRomanNumerals = {"I", "II", "III", "IV", "V"};
+		leftRotor = new JComboBox(rotorRomanNumerals);
+		middleRotor = new JComboBox(rotorRomanNumerals);
+		rightRotor = new JComboBox(rotorRomanNumerals);
+		
 		contentPane.add(inputField);
 		contentPane.add(outputField);
 		

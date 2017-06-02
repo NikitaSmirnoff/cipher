@@ -9,19 +9,19 @@ public class GUI {
 	public static int ReflectorWIDTH = 120;
 	public static int ReflectorHEIGHT = 494;
 	public static int ReflectorX = 50;
-	public static int ReflectorY = 125;
+	public static int ReflectorY = 50;
 	
 	public static int RotorWIDTH = 180;
 	public static int RotorHEIGHT = 494;
 	public static int LeftRotorX = 210;
 	public static int MiddleRotorX = LeftRotorX + 220;
 	public static int RightRotorX = MiddleRotorX + 220;
-	public static int RotorY = 125;
+	public static int RotorY = 50;
 	
 	public static int PlugboardWIDTH = 100;
 	public static int PlugboardHEIGHT = 494;
 	public static int PlugboardX = 870;
-	public static int PlugboardY = 125;
+	public static int PlugboardY = 50;
 	
 	public static int LetterBoxWIDTH = 50;
 		

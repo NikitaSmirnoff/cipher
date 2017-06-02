@@ -125,3 +125,8 @@ why the output is a text field and not just a normal label is to be able to sele
 - (At Home) The output textfield now updates simultaneosly as the input textfield gets updated. Encryption is instant and doesn't require
 you to press enter or click a button after typing in an input to encrypt.
 
+6/2/2017 - Friday (1 Period)
+- Found a bug, if you type too fast or backspace too fast, the output will not catch up and cause an error from the input and output
+length not matching.
+- Found a bug, enigma breaks if anything other than a letter is typed in the input field.
+
