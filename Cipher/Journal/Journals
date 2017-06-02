@@ -111,3 +111,17 @@ at the same time as enigma.
 6/1/2017 - Thursday (2 Periods)
 - Added the JPanel into a ContentPane and made the contentPane (Which includes the text field) show up on the bottom of the screen.
 Which will be used to input letters/phrases for encryption.
+- (At Home) Made the text field always have upper case letters to be aesthetically pleasing.
+- (At Home) Engima encodes the last letter of the input, everytime the textfield is updated. Even when the input is being shortened.
+This is done in the tick() method of the Game class.
+- (At Home) Made a method called updateRotorSettings(int update); in enigma class which can both increment and decrement the rotor settings.
+This became necessary when backspacing and undoing what was encoded, because the rotor settings must undo to their previous settings.
+- (At Home) Fixed Enigma from breaking on start if input is empty, this was because of null pointers. Variables representing results 
+from each rotor were null since nothing has been encoded yet. 
+- (At Home) Fixed rotor settings from not being highlighted when the input is empty.
+- (At Home) Fixed rotor wiring from not appearing when the input is empty.
+- (At Home) Added another JTextField called output. Placed it under the input text field and disabled it as there is no use to edit it. The reason
+why the output is a text field and not just a normal label is to be able to select and copy the output.
+- (At Home) The output textfield now updates simultaneosly as the input textfield gets updated. Encryption is instant and doesn't require
+you to press enter or click a button after typing in an input to encrypt.
+

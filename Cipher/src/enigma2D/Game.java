@@ -21,6 +21,8 @@ public class Game extends Canvas implements Runnable{
 	public static final int RIGHT = 2;
 	public static final int REFLECTOR = 3;
 	public static final int PLUGBOARD = 4;
+	public static final int INCREMENT = 0;
+	public static final int DECREMENT = 1;
 	
 	public static final int WIDTH = 1024, HEIGHT = WIDTH / 12 * 9;
 	
@@ -34,7 +36,9 @@ public class Game extends Canvas implements Runnable{
 	private HUD hud;
 	
 	private Random r;
-	
+
+	public static String input;
+	public static String output;
 	public static EnigmaI enigma;
 	
 	public static void main(String[] args) {
@@ -50,17 +54,16 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler(); // Initialize Handler
 		this.addKeyListener(new KeyInput(handler)); // Tell the game to start listening for keys
 		new Window(WIDTH, HEIGHT, "Engima", this); // Create the window with WIDTH and HEIGHT and call it Enigma
+		input = Window.inputField.getText();
+		output = "";
 		
 		String[] plugs = {"AZ", "XY", "DC"};
 		enigma = new EnigmaI(plugs, 1, "P", 2, "D", 3, "R", "B");
-		enigma.encodePhrase("D");
+		enigma.encodePhrase(input);
 		
 		gui = new GUI();
 		
 		r = new Random();
-		
-//		handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player, handler)); // Add player object to the game
-//		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler)); // Add enemy object to the game
 		
 		// Add all letter objects onto the Reflector, Rotors, and Plugboard.
 		for(int i = 0; i < 26; i++){
@@ -68,30 +71,13 @@ public class Game extends Canvas implements Runnable{
 			handler.addObject(new GLetter(GUI.getReflectorX() + GUI.getReflectorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getReflectorY() + ((GUI.getReflectorHEIGHT() / 26) * i),
 					RIGHT, REFLECTOR, ID.Letter, alphabet[i], handler, enigma));
 			
-			// Left Rotor enigma.getRotors(LEFT).getRotorWiring()[i]
-//			handler.addObject(new GLetter(GUI.getLeftRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
-//					LEFT, LEFT, ID.Letter, alphabet[i], handler, enigma));
-//			handler.addObject(new GLetter(GUI.getLeftRotorX() + GUI.getRotorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
-//					RIGHT, LEFT, ID.Letter, alphabet[i], handler, enigma));
-			
-			// Middle Rotor
-//			handler.addObject(new GLetter(GUI.getMiddleRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
-//					LEFT, MIDDLE, ID.Letter, alphabet[i], handler, enigma));
-//			handler.addObject(new GLetter(GUI.getMiddleRotorX() + GUI.getRotorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
-//					RIGHT, MIDDLE, ID.Letter, alphabet[i], handler, enigma));
-//			
-//			// Right Rotor
-//			handler.addObject(new GLetter(GUI.getRightRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
-//					LEFT, RIGHT, ID.Letter, alphabet[i], handler, enigma));
-//			handler.addObject(new GLetter(GUI.getRightRotorX() + GUI.getRotorWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * i),
-//					RIGHT, RIGHT, ID.Letter, alphabet[i], handler, enigma));
-			
 			// Plugboard
 			handler.addObject(new GLetter(GUI.getPlugboardX(), GUI.getPlugboardY() + ((GUI.getPlugboardHEIGHT() / 26) * i),
 					LEFT, PLUGBOARD, ID.Letter, enigma.getPlugboard().getPlugboard()[i], handler, enigma));
 			handler.addObject(new GLetter(GUI.getPlugboardX() + GUI.getPlugboardWIDTH() - GUI.getLetterBoxWIDTH(), GUI.getPlugboardY() + ((GUI.getPlugboardHEIGHT() / 26) * i),
 					RIGHT, PLUGBOARD, ID.Letter, alphabet[i], handler, enigma));
 		}
+			// Left Rotor
 		for(int i = enigma.getRotors(LEFT).getPos(enigma.getRotors(LEFT).getRotorSetting());
 				i < enigma.getRotors(LEFT).getPos(enigma.getRotors(LEFT).getRotorSetting()) + 26; i++){
 			handler.addObject(new GLetter(GUI.getLeftRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * (i - enigma.getRotors(LEFT).getPos(enigma.getRotors(LEFT).getRotorSetting()))),
@@ -100,6 +86,7 @@ public class Game extends Canvas implements Runnable{
 					RIGHT, LEFT, ID.Letter, alphabet[i % 26], handler, enigma));
 			
 		}
+			// Middle Rotor
 		for(int i = enigma.getRotors(MIDDLE).getPos(enigma.getRotors(MIDDLE).getRotorSetting());
 				i < enigma.getRotors(MIDDLE).getPos(enigma.getRotors(MIDDLE).getRotorSetting()) + 26; i++){
 			handler.addObject(new GLetter(GUI.getMiddleRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * (i - enigma.getRotors(MIDDLE).getPos(enigma.getRotors(MIDDLE).getRotorSetting()))),
@@ -108,6 +95,7 @@ public class Game extends Canvas implements Runnable{
 					RIGHT, MIDDLE, ID.Letter, alphabet[i % 26], handler, enigma));
 			
 		}
+			// Right Rotor
 		for(int i = enigma.getRotors(RIGHT).getPos(enigma.getRotors(RIGHT).getRotorSetting());
 				i < enigma.getRotors(RIGHT).getPos(enigma.getRotors(RIGHT).getRotorSetting()) + 26; i++){
 			handler.addObject(new GLetter(GUI.getRightRotorX(), GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * (i - enigma.getRotors(RIGHT).getPos(enigma.getRotors(RIGHT).getRotorSetting()))),
@@ -154,8 +142,27 @@ public class Game extends Canvas implements Runnable{
 			gui.tick();
 		}
 		
-//		hud.tick();
-		
+		if(!Window.inputField.getText().equals(input)){						// If text has changed
+			if(input.length() > Window.inputField.getText().length()){		// If input has been backspaced
+				enigma.updateRotorSettings(DECREMENT);						// Undo the rotor settings
+				output = output.substring(0, output.length() - 1);
+				
+				if(Window.inputField.getText().length() > 0){
+					enigma.updateRotorSettings(DECREMENT);
+					output = output.substring(0, output.length() - 1);
+				}
+				if(Window.inputField.getText().length() == 0){
+					output = "";
+				}
+			}
+			
+			input = Window.inputField.getText();							// Update the input variable
+			
+			if(input.length() > 0){
+				output += enigma.encodeChar(input.substring(input.length() - 1));		// Encode again
+			}
+			Window.outputField.setText(output);
+		}
 	}
 	
 	private void render() {
@@ -173,9 +180,8 @@ public class Game extends Canvas implements Runnable{
 		if(gui != null){
 			gui.render(g);
 		}
-		handler.render(g);
 		
-//		hud.render(g);
+		handler.render(g);
 		
 		g.dispose();
 		bs.show();

@@ -7,6 +7,8 @@ public class EnigmaI {
 	public static final int LEFT = 0; 
 	public static final int MIDDLE = 1;
 	public static final int RIGHT = 2;
+	public static final int INCREMENT = 0;
+	public static final int DECREMENT = 1;
 	
 	public static Rotor rotors[] = new Rotor[3];
 	public static Plugboard plugboard;
@@ -58,21 +60,43 @@ public class EnigmaI {
 //		enigma = new EnigmaI(plugs, 4, "P", 1, "D", 2, "R", "B");
 //		enigma.encodePhrase("HELLO WORLD");
 	}
-
-	private String encodeChar(String letter) {
-		rotors[RIGHT].incrementRotorSetting();
-		
-		if(rotors[RIGHT].getRotorSetting().equals(rotors[RIGHT].getSecondTurnoverNotch())){
-			rotors[MIDDLE].incrementRotorSetting();
-		} else {
-			if(rotors[MIDDLE].getRotorSetting().equals(rotors[MIDDLE].getFirstTurnoverNotch())){
+	
+	public void updateRotorSettings(int update) {
+		if(update == INCREMENT){
+			rotors[RIGHT].incrementRotorSetting();
+			
+			if(rotors[RIGHT].getRotorSetting().equals(rotors[RIGHT].getSecondTurnoverNotch())){
 				rotors[MIDDLE].incrementRotorSetting();
-				
-				if(rotors[MIDDLE].getRotorSetting().equals(rotors[MIDDLE].getSecondTurnoverNotch())){
-					rotors[LEFT].incrementRotorSetting();
+			} else {
+				if(rotors[MIDDLE].getRotorSetting().equals(rotors[MIDDLE].getFirstTurnoverNotch())){
+					rotors[MIDDLE].incrementRotorSetting();
+					
+					if(rotors[MIDDLE].getRotorSetting().equals(rotors[MIDDLE].getSecondTurnoverNotch())){
+						rotors[LEFT].incrementRotorSetting();
+					}
 				}
 			}
 		}
+		if(update == DECREMENT){
+			rotors[RIGHT].decrementRotorSetting();
+			
+			if(rotors[RIGHT].getRotorSetting().equals(rotors[RIGHT].getFirstTurnoverNotch())){
+				rotors[MIDDLE].decrementRotorSetting();
+			} else {
+				if(rotors[MIDDLE].getRotorSetting().equals(rotors[MIDDLE].getSecondTurnoverNotch())){
+					rotors[MIDDLE].decrementRotorSetting();
+					
+					if(rotors[MIDDLE].getRotorSetting().equals(rotors[MIDDLE].getFirstTurnoverNotch())){
+						rotors[LEFT].decrementRotorSetting();
+					}
+				}
+			}
+		}
+		
+	}
+
+	public String encodeChar(String letter) {
+		updateRotorSettings(INCREMENT);
 		
 		this.input = letter;
 		this.resultOfPlugboard = plugboard.getConnection(input.toUpperCase());
@@ -97,21 +121,23 @@ public class EnigmaI {
 		this.inputOfPlugboardBack = plugboard.getEncodeAfterInput(this.resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
 		this.resultOfPlugboardBack = plugboard.encodeLetterBack(this.resultOfRotorRightBack, rotors[RIGHT].getRotorSetting());
 		
-		System.out.println("Rotor Settings: " + rotors[LEFT].getRotorSetting() + rotors[MIDDLE].getRotorSetting() + rotors[RIGHT].getRotorSetting());
-		System.out.println(letter.toUpperCase() + " > " + resultOfPlugboard + " | " + inputOfRotorRight + " > " + resultOfRotorRight + " > "
-				 + inputOfRotorMiddle + " > " + resultOfRotorMiddle + " > " + inputOfRotorLeft + " > " + resultOfRotorLeft + " > " + inputOfReflector + " > " + resultOfReflector + " > "
-				 + inputOfRotorLeftBack + " > " + resultOfRotorLeftBack + " > " + inputOfRotorMiddleBack + " > " + resultOfRotorMiddleBack + " > " + inputOfRotorRightBack + " > " + resultOfRotorRightBack + " | "
-				 + inputOfPlugboardBack + " > " + resultOfPlugboardBack);
+//		System.out.println("Rotor Settings: " + rotors[LEFT].getRotorSetting() + rotors[MIDDLE].getRotorSetting() + rotors[RIGHT].getRotorSetting());
+//		System.out.println(letter.toUpperCase() + " > " + resultOfPlugboard + " | " + inputOfRotorRight + " > " + resultOfRotorRight + " > "
+//				 + inputOfRotorMiddle + " > " + resultOfRotorMiddle + " > " + inputOfRotorLeft + " > " + resultOfRotorLeft + " > " + inputOfReflector + " > " + resultOfReflector + " > "
+//				 + inputOfRotorLeftBack + " > " + resultOfRotorLeftBack + " > " + inputOfRotorMiddleBack + " > " + resultOfRotorMiddleBack + " > " + inputOfRotorRightBack + " > " + resultOfRotorRightBack + " | "
+//				 + inputOfPlugboardBack + " > " + resultOfPlugboardBack);
 		
 		return resultOfPlugboardBack;
 		
 	}
 	
-	private String encodeWord(String word) {
+	public String encodeWord(String word) {
 		String result = "";
 		
-		for(int i = 0; i < word.length(); i++){
-			result = result + encodeChar(word.substring(i, i + 1));
+		if(word.length() > 0){
+			for(int i = 0; i < word.length(); i++){
+				result = result + encodeChar(word.substring(i, i + 1));
+			}
 		}
 		
 		return result;
@@ -234,7 +260,5 @@ public class EnigmaI {
 	public String getResultOfPlugboardBack() {
 		return this.resultOfPlugboardBack;
 	}
-	
-	
 
 }

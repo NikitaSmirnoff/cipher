@@ -41,118 +41,136 @@ public class GLetter extends GameObject{
 	}
 	
 	public void tick(){
-		if(this.part == PLUGBOARD){
-			if(this.side == RIGHT){
-				if(enigma.getInput().equals(letter)){
-					result = true;
-					resultColor = Color.RED;
-				} else {
-					if(enigma.getResultOfPlugboardBack().equals(letter)){
+		if(Game.input.length() > 0){	
+			if(this.part == PLUGBOARD){
+				if(this.side == RIGHT){
+					if(enigma.getInput().equals(letter)){
 						result = true;
-						resultColor = Color.GREEN;
+						resultColor = Color.RED;
 					} else {
-						result = false;
+						if(enigma.getResultOfPlugboardBack().equals(letter)){
+							result = true;
+							resultColor = Color.GREEN;
+						} else {
+							result = false;
+						}
 					}
+					
 				}
-				
-			}
-			if(this.side == LEFT){
-				if(enigma.getResultOfPlugboard().equals(letter)){
-					result = true;
-					resultColor = Color.RED;
-				} else {
-					if(enigma.getInputOfPlugboardBack().equals(letter)){
+				if(this.side == LEFT){
+					if(enigma.getResultOfPlugboard().equals(letter)){
 						result = true;
-						resultColor = Color.GREEN;
+						resultColor = Color.RED;
 					} else {
-						result = false;
+						if(enigma.getInputOfPlugboardBack().equals(letter)){
+							result = true;
+							resultColor = Color.GREEN;
+						} else {
+							result = false;
+						}
 					}
+					
 				}
-				
 			}
-		}
-		
-		if(this.part == LEFT || this.part == MIDDLE || this.part == RIGHT){
-			if(this.side == RIGHT){
+			
+			if(this.part == LEFT || this.part == MIDDLE || this.part == RIGHT){
 				if(enigma.getRotors(this.part).getRotorSetting().equals(letter)){
 					position = true;
 				} else {
 					position = false;
 				}
-				if(this.part == RIGHT){
-					if(enigma.getInputOfRotorRight().equals(letter)){
-						result = true;
-						resultColor = Color.RED;
-					} else {
-						if(enigma.getResultOfRotorRightBack().equals(letter)){
+				if(this.side == RIGHT){
+					if(this.part == RIGHT){
+						if(enigma.getInputOfRotorRight().equals(letter)){
 							result = true;
-							resultColor = Color.GREEN;
+							resultColor = Color.RED;
 						} else {
-							result = false;
+							if(enigma.getResultOfRotorRightBack().equals(letter)){
+								result = true;
+								resultColor = Color.GREEN;
+							} else {
+								result = false;
+							}
+						}
+					}
+					if(this.part == MIDDLE){
+						if(enigma.getInputOfRotorMiddle().equals(letter)){
+							result = true;
+							resultColor = Color.RED;
+						} else {
+							if(enigma.getResultOfRotorMiddleBack().equals(letter)){
+								result = true;
+								resultColor = Color.GREEN;
+							} else {
+								result = false;
+							}
+						}
+					}
+					if(this.part == LEFT){
+						if(enigma.getInputOfRotorLeft().equals(letter)){
+							result = true;
+							resultColor = Color.RED;
+						} else {
+							if(enigma.getResultOfRotorLeftBack().equals(letter)){
+								result = true;
+								resultColor = Color.GREEN;
+							} else {
+								result = false;
+							}
 						}
 					}
 				}
-				if(this.part == MIDDLE){
-					if(enigma.getInputOfRotorMiddle().equals(letter)){
-						result = true;
-						resultColor = Color.RED;
-					} else {
-						if(enigma.getResultOfRotorMiddleBack().equals(letter)){
+				
+				if(this.side == LEFT){
+					if(this.part == RIGHT){
+						if(enigma.getResultOfRotorRight().equals(letter)){
 							result = true;
-							resultColor = Color.GREEN;
+							resultColor = Color.RED;
 						} else {
-							result = false;
+							if(enigma.getInputOfRotorRightBack().equals(letter)){
+								result = true;
+								resultColor = Color.GREEN;
+							} else {
+								result = false;
+							}
 						}
 					}
-				}
-				if(this.part == LEFT){
-					if(enigma.getInputOfRotorLeft().equals(letter)){
-						result = true;
-						resultColor = Color.RED;
-					} else {
-						if(enigma.getResultOfRotorLeftBack().equals(letter)){
+					if(this.part == MIDDLE){
+						if(enigma.getResultOfRotorMiddle().equals(letter)){
 							result = true;
-							resultColor = Color.GREEN;
+							resultColor = Color.RED;
 						} else {
-							result = false;
+							if(enigma.getInputOfRotorMiddleBack().equals(letter)){
+								result = true;
+								resultColor = Color.GREEN;
+							} else {
+								result = false;
+							}
+						}
+					}
+					if(this.part == LEFT){
+						if(enigma.getResultOfRotorLeft().equals(letter)){
+							result = true;
+							resultColor = Color.RED;
+						} else {
+							if(enigma.getInputOfRotorLeftBack().equals(letter)){
+								result = true;
+								resultColor = Color.GREEN;
+							} else {
+								result = false;
+							}
 						}
 					}
 				}
 			}
 			
-			if(this.side == LEFT){
-				if(this.part == RIGHT){
-					if(enigma.getResultOfRotorRight().equals(letter)){
+			if(this.part == REFLECTOR){
+				if(this.side == RIGHT){
+					if(enigma.getInputOfReflector().equals(letter)){
 						result = true;
 						resultColor = Color.RED;
 					} else {
-						if(enigma.getInputOfRotorRightBack().equals(letter)){
-							result = true;
-							resultColor = Color.GREEN;
-						} else {
-							result = false;
-						}
-					}
-				}
-				if(this.part == MIDDLE){
-					if(enigma.getResultOfRotorMiddle().equals(letter)){
-						result = true;
-						resultColor = Color.RED;
-					} else {
-						if(enigma.getInputOfRotorMiddleBack().equals(letter)){
-							result = true;
-							resultColor = Color.GREEN;
-						} else {
-							result = false;
-						}
-					}
-				}
-				if(this.part == LEFT){
-					if(enigma.getResultOfRotorLeft().equals(letter)){
-						result = true;
-						resultColor = Color.RED;
-					} else {
-						if(enigma.getInputOfRotorLeftBack().equals(letter)){
+						if(enigma.getResultOfReflector().equals(letter)){
 							result = true;
 							resultColor = Color.GREEN;
 						} else {
@@ -161,22 +179,15 @@ public class GLetter extends GameObject{
 					}
 				}
 			}
-		}
-		
-		if(this.part == REFLECTOR){
-			if(this.side == RIGHT){
-				if(enigma.getInputOfReflector().equals(letter)){
-					result = true;
-					resultColor = Color.RED;
+		} else {
+			if(this.part == LEFT || this.part == MIDDLE || this.part == RIGHT){
+				if(enigma.getRotors(this.part).getRotorSetting().equals(letter)){
+					position = true;
 				} else {
-					if(enigma.getResultOfReflector().equals(letter)){
-						result = true;
-						resultColor = Color.GREEN;
-					} else {
-						result = false;
-					}
+					position = false;
 				}
 			}
+			result = false;
 		}
 	}
 	
@@ -187,7 +198,7 @@ public class GLetter extends GameObject{
 			g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
 		} else {
 			if(position){
-				g.setColor(new Color(207, 207, 207)); 					// Background if the letter is the rotor's current position
+				g.setColor(new Color(157, 157, 157)); 					// Background if the letter is the rotor's current position
 				g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
 			} else {
 				g.setColor(new Color(247, 247, 247)); 					// Background
@@ -204,7 +215,7 @@ public class GLetter extends GameObject{
 		}
 		if(this.side == RIGHT){
 			g.drawString(this.letter, this.x + ((GUI.getLetterBoxWIDTH() / 10) * 2), this.y + (GUI.getRotorHEIGHT() / 32));
-		}
+		}	
 		connectLetters(g);
 		
 	}
@@ -216,44 +227,77 @@ public class GLetter extends GameObject{
 		for(int i = 0; i < handler.object.size(); i++){
 			GLetter tempObject = (GLetter) handler.object.get(i);
 			
-			if(tempObject.getID() == ID.Letter){
-				if(this.side == RIGHT && tempObject.getSide() == LEFT){
-					if(this.part == RIGHT && tempObject.getPart() == RIGHT){
-						if((enigma.getInputOfRotorRight().equals(this.letter) && enigma.getResultOfRotorRight().equals(tempObject.getLetter())) 
-							|| (enigma.getResultOfRotorRightBack().equals(this.letter) && enigma.getInputOfRotorRightBack().equals(tempObject.getLetter()))){
-							drawRotorLine(Color.BLACK, 3, g, tempObject);
+			if(Game.input.length() > 0){
+				if(tempObject.getID() == ID.Letter){
+					if(this.side == RIGHT && tempObject.getSide() == LEFT){
+						if(this.part == RIGHT && tempObject.getPart() == RIGHT){
+							if((enigma.getInputOfRotorRight().equals(this.letter) && enigma.getResultOfRotorRight().equals(tempObject.getLetter())) 
+								|| (enigma.getResultOfRotorRightBack().equals(this.letter) && enigma.getInputOfRotorRightBack().equals(tempObject.getLetter()))){
+								drawRotorLine(Color.BLACK, 3, g, tempObject);
+							} else {
+								if(enigma.getRotors(RIGHT).getConnection(this.letter).equals(tempObject.getLetter())){
+									drawRotorLine(Color.GRAY, 1, g, tempObject);
+								}
+							}
 						}
-						if(enigma.getRotors(RIGHT).getConnection(this.letter).equals(tempObject.getLetter())){
-							drawRotorLine(Color.GRAY, 1, g, tempObject);
+						if(this.part == MIDDLE && tempObject.getPart() == MIDDLE){
+							if((enigma.getInputOfRotorMiddle().equals(this.letter) && enigma.getResultOfRotorMiddle().equals(tempObject.getLetter()))
+									|| (enigma.getResultOfRotorMiddleBack().equals(this.letter) && enigma.getInputOfRotorMiddleBack().equals(tempObject.getLetter()))){
+								drawRotorLine(Color.BLACK, 3, g, tempObject);
+							} else {
+								if(enigma.getRotors(MIDDLE).getConnection(this.letter).equals(tempObject.getLetter())){
+									drawRotorLine(Color.GRAY, 1, g, tempObject);
+								}
+							}
+						}
+						if(this.part == LEFT && tempObject.getPart() == LEFT){
+							if((enigma.getInputOfRotorLeft().equals(this.letter) && enigma.getResultOfRotorLeft().equals(tempObject.getLetter()))
+								|| (enigma.getResultOfRotorLeftBack().equals(this.letter) && enigma.getInputOfRotorLeftBack().equals(tempObject.getLetter()))){
+								drawRotorLine(Color.BLACK, 3, g, tempObject);
+							} else {
+								if(enigma.getRotors(LEFT).getConnection(this.letter).equals(tempObject.getLetter())){
+									drawRotorLine(Color.GRAY, 1, g, tempObject);
+								}
+							}
 						}
 					}
-					if(this.part == MIDDLE && tempObject.getPart() == MIDDLE){
-						if((enigma.getInputOfRotorMiddle().equals(this.letter) && enigma.getResultOfRotorMiddle().equals(tempObject.getLetter()))  
-							|| (enigma.getResultOfRotorMiddleBack().equals(this.letter) && enigma.getInputOfRotorMiddleBack().equals(tempObject.getLetter()))){
-							drawRotorLine(Color.BLACK, 3, g, tempObject);
-						}
-						if(enigma.getRotors(MIDDLE).getConnection(this.letter).equals(tempObject.getLetter())){
-							drawRotorLine(Color.GRAY, 1, g, tempObject);
-						}
-					}
-					if(this.part == LEFT && tempObject.getPart() == LEFT){
-						if((enigma.getInputOfRotorLeft().equals(this.letter) && enigma.getResultOfRotorLeft().equals(tempObject.getLetter())) 
-							|| (enigma.getResultOfRotorLeftBack().equals(this.letter) && enigma.getInputOfRotorLeftBack().equals(tempObject.getLetter()))){
-							drawRotorLine(Color.BLACK, 3, g, tempObject);
-						}
-						if(enigma.getRotors(LEFT).getConnection(this.letter).equals(tempObject.getLetter())){
-							drawRotorLine(Color.GRAY, 1, g, tempObject);
+					if(this.side == RIGHT && tempObject.getSide() == RIGHT){
+						if(this.part == REFLECTOR && tempObject.getPart() == REFLECTOR){
+							if(enigma.getInputOfReflector().equals(tempObject.getLetter()) && enigma.getResultOfReflector().equals(this.letter)){
+								drawReflectorLine(Color.BLACK, 3, g, tempObject);
+								drawReflectorLine(Color.GRAY, 1, g, tempObject);
+							} else {
+								if(enigma.getReflector().getPos(tempObject.getLetter()) > enigma.getReflector().getPos(this.letter) && enigma.getReflector().getConnection(this.letter).equals(tempObject.getLetter())){
+									drawReflectorLine(Color.GRAY, 1, g, tempObject);
+								}
+							}
 						}
 					}
 				}
-				
-				if(this.side == RIGHT && tempObject.getSide() == RIGHT){
-					if(this.part == REFLECTOR && tempObject.getPart() == REFLECTOR){
-						if(enigma.getInputOfReflector().equals(tempObject.getLetter()) && enigma.getResultOfReflector().equals(this.letter)){
-							drawReflectorLine(Color.BLACK, 3, g, tempObject);
+			} else {
+				if(tempObject.getID() == ID.Letter){
+					if(this.side == RIGHT && tempObject.getSide() == LEFT){
+						if(this.part == RIGHT && tempObject.getPart() == RIGHT){
+							if(enigma.getRotors(RIGHT).getConnection(this.letter).equals(tempObject.getLetter())){
+								drawRotorLine(Color.GRAY, 1, g, tempObject);
+							}
 						}
-						if(enigma.getReflector().getPos(tempObject.getLetter()) > enigma.getReflector().getPos(this.letter) && enigma.getReflector().getConnection(this.letter).equals(tempObject.getLetter())){
-							drawReflectorLine(Color.GRAY, 1, g, tempObject);
+						if(this.part == MIDDLE && tempObject.getPart() == MIDDLE){
+							if(enigma.getRotors(MIDDLE).getConnection(this.letter).equals(tempObject.getLetter())){
+								drawRotorLine(Color.GRAY, 1, g, tempObject);
+							}
+						}
+						if(this.part == LEFT && tempObject.getPart() == LEFT){
+							if(enigma.getRotors(LEFT).getConnection(this.letter).equals(tempObject.getLetter())){
+								drawRotorLine(Color.GRAY, 1, g, tempObject);
+							}
+						}
+					}
+					if(this.side == RIGHT && tempObject.getSide() == RIGHT){
+						if(this.part == REFLECTOR && tempObject.getPart() == REFLECTOR){
+							if(enigma.getReflector().getPos(tempObject.getLetter()) > enigma.getReflector().getPos(this.letter) && enigma.getReflector().getConnection(this.letter).equals(tempObject.getLetter())){
+								drawReflectorLine(Color.GRAY, 1, g, tempObject);
+							}
 						}
 					}
 				}

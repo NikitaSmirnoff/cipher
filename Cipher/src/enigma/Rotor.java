@@ -51,12 +51,12 @@ public class Rotor {
 	}
 	
 	public String incrementRotorSetting() {
-		this.rotorSetting = this.alphabet[(getPos(this.rotorSetting) + 1) % 26];
+		this.rotorSetting = this.alphabet[(getPos(this.rotorSetting) + 27) % 26];
 		return this.rotorSetting;
 	}
 	
 	public String decrementRotorSetting() {
-		this.rotorSetting = this.alphabet[(getPos(this.rotorSetting) - 1) % 26];
+		this.rotorSetting = this.alphabet[(getPos(this.rotorSetting) + 25) % 26];
 		return this.rotorSetting;
 	}
 	
