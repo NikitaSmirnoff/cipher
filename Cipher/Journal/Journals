@@ -140,4 +140,9 @@ the settings throughout an input.
 - (At Home) Plugboard now properly updates when changing the plugs. But it doesnt undo the plugboard when clearing plugs yet. And plugs are allowed
 to be duplicates which needs to be fixed.
 - (At Home) Plugboard now undos when clearing plugs, but it doesn't reset engima and the input text field yet.
+- (At Home) Added method called cancelDuplicatePlugs to window class which prohibits any duplicate letters to be passed when changing plugs.
+- (At Home) Enigma now resets and input field resets properly when clearing plugs.
+- (At Home) JComboBoxes for rotors and reflector now work properly and actually switch out the parts.
+- (At Home) Added a reset and a clear button. "Clear" simply clears the input and returns all rotor positions to how they started, and "reset" does the
+same thing as "clear" but sets enigma to default settings (Rotors: I, II, III) (Positions: A, A, A) (Reflector: UKW-B) and no plugs.
 

@@ -67,11 +67,15 @@ public class Window extends Canvas{
 	public static BasicArrowButton middlePositionButtonWest;
 	public static BasicArrowButton rightPositionButtonEast;
 	public static BasicArrowButton rightPositionButtonWest;
+	public static JButton clearButton;
+	public static JButton resetButton;
 	public static JLabel leftPositionLabel;
 	public static JLabel middlePositionLabel;
 	public static JLabel rightPositionLabel;
 	
 	public static EnigmaI enigma;
+	private static String[] rotorRomanNumerals  = {"   I ", "   II ", "   III ", "   IV ", "   V "};
+	private static String[] reflectors  = {"   UKW-A   ", "   UKW-B   ", "   UKW-C   "};
 
 	public Window(int width, int height, String title, Game game, EnigmaI enigma){
 		this.enigma = enigma;
@@ -89,7 +93,7 @@ public class Window extends Canvas{
 		layout = new SpringLayout();
 		contentPane = frame.getContentPane();
 		contentPane.setLayout(layout);
-		contentPane.setBackground(new Color(247, 247, 247));
+		contentPane.setBackground(Color.WHITE);
 		
 		JPanel panel = new JPanel();	//Enigma Window
 		panel.setLayout(new GridLayout(1, 1));			
@@ -123,7 +127,7 @@ public class Window extends Canvas{
 			public void actionPerformed(ActionEvent action){
 				enigma.getRotors(LEFT).incrementRotorSetting();
 				leftPositionLabel.setText("[ " + enigma.getRotors(LEFT).getRotorSetting() + " ]");
-				reset();
+				resetInput();
 			}
 		});
 		contentPane.add(leftPositionButtonWest);
@@ -131,7 +135,7 @@ public class Window extends Canvas{
 			public void actionPerformed(ActionEvent action){
 				enigma.getRotors(LEFT).decrementRotorSetting();
 				leftPositionLabel.setText("[ " + enigma.getRotors(LEFT).getRotorSetting() + " ]");
-				reset();
+				resetInput();
 			}
 		});
 		contentPane.add(middlePositionButtonEast);
@@ -139,7 +143,7 @@ public class Window extends Canvas{
 			public void actionPerformed(ActionEvent action){
 				enigma.getRotors(MIDDLE).incrementRotorSetting();
 				middlePositionLabel.setText("[ " + enigma.getRotors(MIDDLE).getRotorSetting() + " ]");
-				reset();
+				resetInput();
 			}
 		});
 		contentPane.add(middlePositionButtonWest);
@@ -147,7 +151,7 @@ public class Window extends Canvas{
 			public void actionPerformed(ActionEvent action){
 				enigma.getRotors(MIDDLE).decrementRotorSetting();
 				middlePositionLabel.setText("[ " + enigma.getRotors(MIDDLE).getRotorSetting() + " ]");
-				reset();
+				resetInput();
 			}
 		});
 		contentPane.add(rightPositionButtonEast);
@@ -155,7 +159,7 @@ public class Window extends Canvas{
 			public void actionPerformed(ActionEvent action){
 				enigma.getRotors(RIGHT).incrementRotorSetting();
 				rightPositionLabel.setText("[ " + enigma.getRotors(RIGHT).getRotorSetting() + " ]");
-				reset();
+				resetInput();
 			}
 		});
 		contentPane.add(rightPositionButtonWest);
@@ -163,7 +167,7 @@ public class Window extends Canvas{
 			public void actionPerformed(ActionEvent action){
 				enigma.getRotors(RIGHT).decrementRotorSetting();
 				rightPositionLabel.setText("[ " + enigma.getRotors(RIGHT).getRotorSetting() + " ]");
-				reset();
+				resetInput();
 			}
 		});
 		
@@ -180,11 +184,34 @@ public class Window extends Canvas{
 		layout.putConstraint(SpringLayout.NORTH, rightPositionButtonWest, -125, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, rightPositionButtonWest, GUI.RightRotorX + 105, SpringLayout.WEST, frame.getContentPane());
 		
+		clearButton = new JButton(" Clear  ");
+		resetButton = new JButton(" Reset ");
+		
+		clearButton.setPreferredSize(new Dimension(80, 19));
+		resetButton.setPreferredSize(new Dimension(80, 20));
+		
+		contentPane.add(clearButton);
+		clearButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				resetInput();
+			}
+		});
+		contentPane.add(resetButton);
+		resetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				resetEnigma();
+			}
+		});
+		
+		layout.putConstraint(SpringLayout.NORTH, clearButton, -80, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.WEST, clearButton, GUI.RightRotorX + 100, SpringLayout.WEST, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, resetButton, -50, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.WEST, resetButton, GUI.RightRotorX + 100, SpringLayout.WEST, frame.getContentPane());
+		
+		
 	}
 	
 	private static void addComboBoxes(){
-		String[] rotorRomanNumerals = {"   I ", "   II ", "   III ", "   IV ", "   V "};
-		String[] reflectors = {"   UKW-A   ", "   UKW-B   ", "   UKW-C   "};
 		leftRotor = new JComboBox(rotorRomanNumerals);
 		middleRotor = new JComboBox(rotorRomanNumerals);
 		rightRotor = new JComboBox(rotorRomanNumerals);
@@ -195,6 +222,13 @@ public class Window extends Canvas{
 		contentPane.add(rightRotor);
 		contentPane.add(reflector);
 		
+		leftRotor.setSelectedItem(rotorRomanNumerals[0]);
+		middleRotor.setSelectedItem(rotorRomanNumerals[1]);
+		rightRotor.setSelectedItem(rotorRomanNumerals[2]);
+		reflector.setSelectedItem(reflectors[1]);
+		
+		
+		
 		layout.putConstraint(SpringLayout.NORTH, leftRotor, -130, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, leftRotor, GUI.LeftRotorX + 20, SpringLayout.WEST, frame.getContentPane());
 		layout.putConstraint(SpringLayout.NORTH, middleRotor, -130, SpringLayout.SOUTH, frame.getContentPane());
@@ -203,6 +237,31 @@ public class Window extends Canvas{
 		layout.putConstraint(SpringLayout.WEST, rightRotor, GUI.RightRotorX + 20, SpringLayout.WEST, frame.getContentPane());
 		layout.putConstraint(SpringLayout.NORTH, reflector, -130, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, reflector, GUI.ReflectorX + 20, SpringLayout.WEST, frame.getContentPane());
+		
+		leftRotor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				enigma.getRotors(LEFT).setRotor(leftRotor.getSelectedIndex() + 1);
+				resetInput();
+			}
+		});
+		middleRotor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				enigma.getRotors(MIDDLE).setRotor(middleRotor.getSelectedIndex() + 1);
+				resetInput();
+			}
+		});
+		rightRotor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				enigma.getRotors(RIGHT).setRotor(rightRotor.getSelectedIndex() + 1);
+				resetInput();
+			}
+		});
+		reflector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				enigma.getReflector().setReflector(Game.alphabet[reflector.getSelectedIndex()]);
+				resetInput();
+			}
+		});
 		
 //		removeButton(leftRotor);
 //		removeButton(middleRotor);
@@ -213,7 +272,7 @@ public class Window extends Canvas{
 	}
 	
 	private static void addTextFields(){
-		inputField = new JTextField("", 60);
+		inputField = new JTextField("", 57);
 		inputField.addKeyListener(new KeyAdapter() {
 
 			  public void keyTyped(KeyEvent e) {
@@ -227,7 +286,7 @@ public class Window extends Canvas{
 			  }
 			  
 		});
-		outputField = new JTextField("", 60);
+		outputField = new JTextField("", 57);
 		outputField.setEditable(false);
 		
 		contentPane.add(inputField);
@@ -255,7 +314,7 @@ public class Window extends Canvas{
 		for(int i = 0; i < plugboardFields.length; i++){
 			
 			contentPane.add(plugboardFields[i]);
-			layout.putConstraint(SpringLayout.NORTH, plugboardFields[i], -135 + (i / 5 * 30), SpringLayout.SOUTH, frame.getContentPane());
+			layout.putConstraint(SpringLayout.NORTH, plugboardFields[i], -140 + (i / 5 * 30), SpringLayout.SOUTH, frame.getContentPane());
 			layout.putConstraint(SpringLayout.WEST, plugboardFields[i], GUI.PlugboardX - 20 + ((i % 5)* 28), SpringLayout.WEST, frame.getContentPane());
 		}
 		
@@ -265,14 +324,17 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardAField.getText().length() >= 2 ){
+			    if(plugboardAField.getText().length() >= 2){
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
+			    
 			}
 		});
 		plugboardBField.addKeyListener(new KeyAdapter() {
@@ -281,14 +343,16 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardBField.getText().length() >= 2 ){ 
+			    if(plugboardBField.getText().length() >= 2){ 
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
 			}	  
 		});
 		plugboardCField.addKeyListener(new KeyAdapter() {
@@ -297,14 +361,16 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardCField.getText().length() >= 2 ){
+			    if(plugboardCField.getText().length() >= 2){
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
 			}	  
 		});
 		plugboardDField.addKeyListener(new KeyAdapter() {
@@ -313,14 +379,16 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardDField.getText().length() >= 2 ){
+			    if(plugboardDField.getText().length() >= 2){
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
 			}	  
 		});
 		plugboardEField.addKeyListener(new KeyAdapter() {
@@ -329,14 +397,16 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardEField.getText().length() >= 2 ){
+			    if(plugboardEField.getText().length() >= 2){
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
 			}	  
 		});
 		plugboardFField.addKeyListener(new KeyAdapter() {
@@ -345,14 +415,16 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardFField.getText().length() >= 2 ){
+			    if(plugboardFField.getText().length() >= 2){
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
 			}	  
 		});
 		plugboardGField.addKeyListener(new KeyAdapter() {
@@ -361,14 +433,16 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardGField.getText().length() >= 2 ){
+			    if(plugboardGField.getText().length() >= 2){
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
 			}	  
 		});
 		plugboardHField.addKeyListener(new KeyAdapter() {
@@ -377,14 +451,16 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardHField.getText().length() >= 2 ){
+			    if(plugboardHField.getText().length() >= 2){
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
 			}	  
 		});
 		plugboardIField.addKeyListener(new KeyAdapter() {
@@ -393,14 +469,16 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardIField.getText().length() >= 2 ){
+			    if(plugboardIField.getText().length() >= 2){
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
 			}	  
 		});
 		plugboardJField.addKeyListener(new KeyAdapter() {
@@ -409,14 +487,16 @@ public class Window extends Canvas{
 				char keyChar = e.getKeyChar();
 			    if(Character.isLowerCase(keyChar)){
 			        e.setKeyChar(Character.toUpperCase(keyChar));
-			        Window.reset();
+			        Window.resetInput();
 			    }
 			    if(!Character.isAlphabetic(keyChar)){
-			    	e.setKeyChar('\u0000');
+			    	e.consume();
 			    }
-			    if(plugboardJField.getText().length() >= 2 ){
+			    if(plugboardJField.getText().length() >= 2){
 		            e.consume();
 			    }
+			    cancelDuplicatePlugs(plugboardFields, Character.toUpperCase(keyChar), e);
+			    resetInput();
 			}	  
 		});
 		
@@ -452,23 +532,23 @@ public class Window extends Canvas{
 		layout.putConstraint(SpringLayout.NORTH, outputFieldLabel, -50, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, outputFieldLabel, GUI.ReflectorX - 1, SpringLayout.WEST, frame.getContentPane());
 		
-		layout.putConstraint(SpringLayout.NORTH, leftRotorLabel, -160, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, leftRotorLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, leftRotorLabel, GUI.LeftRotorX + 18, SpringLayout.WEST, frame.getContentPane());
-		layout.putConstraint(SpringLayout.NORTH, middleRotorLabel, -160, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, middleRotorLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, middleRotorLabel, GUI.MiddleRotorX + 12, SpringLayout.WEST, frame.getContentPane());
-		layout.putConstraint(SpringLayout.NORTH, rightRotorLabel, -160, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, rightRotorLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, rightRotorLabel, GUI.RightRotorX + 15, SpringLayout.WEST, frame.getContentPane());
 		
-		layout.putConstraint(SpringLayout.NORTH, leftSettingLabel, -160, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, leftSettingLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, leftSettingLabel, GUI.LeftRotorX + 120, SpringLayout.WEST, frame.getContentPane());
-		layout.putConstraint(SpringLayout.NORTH, middleSettingLabel, -160, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, middleSettingLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, middleSettingLabel, GUI.MiddleRotorX + 120, SpringLayout.WEST, frame.getContentPane());
-		layout.putConstraint(SpringLayout.NORTH, rightSettingLabel, -160, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, rightSettingLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, rightSettingLabel, GUI.RightRotorX + 120, SpringLayout.WEST, frame.getContentPane());
 		
-		layout.putConstraint(SpringLayout.NORTH, reflectorLabel, -160, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, reflectorLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, reflectorLabel, GUI.ReflectorX + 35, SpringLayout.WEST, frame.getContentPane());
-		layout.putConstraint(SpringLayout.NORTH, plugboardLabel, -160, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, plugboardLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, plugboardLabel, GUI.PlugboardX + 20, SpringLayout.WEST, frame.getContentPane());
 		
 		leftPositionLabel = new JLabel("[ " + enigma.getRotors(LEFT).getRotorSetting() + " ]");
@@ -496,10 +576,53 @@ public class Window extends Canvas{
 	     }
 	}
 	
-	static void reset(){
+	private static void cancelDuplicatePlugs(JTextField[] plugboardFields, char keyChar, KeyEvent e){
+		for(int i = 0; i < plugboardFields.length; i++){
+	    	if(plugboardFields[i].getText().length() == 1){
+				if(plugboardFields[i].getText().charAt(0) == keyChar){
+					e.consume();
+				}
+	    	}
+	    	if(plugboardFields[i].getText().length() == 2){
+				if(plugboardFields[i].getText().charAt(0) == keyChar){
+					e.consume();
+				}
+				if(plugboardFields[i].getText().charAt(1) == keyChar){
+					e.consume();
+				}
+	    	}
+		}
+	}
+	
+	public static void resetInput(){
 		if(inputField.getText().length() > 0){
 			enigma.updateRotorSettings(INCREMENT);
 		}
+		for(int i = 0; i < inputField.getText().length(); i++){
+			enigma.updateRotorSettings(DECREMENT);
+		}
 		inputField.setText("");
+	}
+	
+	public static void resetEnigma(){
+		resetInput();
+		String[] plugs = {"", "", "", "", "", "", "", "", "", ""};
+		enigma.setEnigma(new EnigmaI(plugs, 1, "A", 2, "A", 3, "B", "B"));
+		
+		leftRotor.setSelectedItem(rotorRomanNumerals[0]);
+		middleRotor.setSelectedItem(rotorRomanNumerals[1]);
+		rightRotor.setSelectedItem(rotorRomanNumerals[2]);
+		reflector.setSelectedItem(reflectors[1]);
+		
+		leftPositionLabel.setText("[ " + enigma.getRotors(LEFT).getRotorSetting() + " ]");
+		middlePositionLabel.setText("[ " + enigma.getRotors(MIDDLE).getRotorSetting() + " ]");
+		rightPositionLabel.setText("[ " + enigma.getRotors(RIGHT).getRotorSetting() + " ]");
+		
+		JTextField[] plugboardFields = {plugboardAField, plugboardBField, plugboardCField, plugboardDField, plugboardEField,
+				plugboardFField, plugboardGField, plugboardHField, plugboardIField, plugboardJField};
+		for(int i = 0; i < plugboardFields.length; i++){
+			plugboardFields[i].setText("");
+			enigma.getPlugboard().setPlugs("", i);
+		}
 	}
 }

@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.TextField;
 import java.awt.image.BufferStrategy;
+import java.util.Arrays;
 import java.util.Random;
 
 import javax.swing.JTextField;
@@ -57,7 +58,7 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler(); // Initialize Handler
 		this.addKeyListener(new KeyInput(handler)); // Tell the game to start listening for keys
 		
-		String[] plugs = {"AB", "", "", "", "", "", "", "", "", ""};
+		String[] plugs = {"", "", "", "", "", "", "", "", "", ""};
 		enigma = new EnigmaI(plugs, 1, "A", 2, "A", 3, "A", "B");
 		
 		new Window(WIDTH, HEIGHT, "Engima", this, enigma); // Create the window with WIDTH and HEIGHT and call it Enigma
@@ -136,7 +137,7 @@ public class Game extends Canvas implements Runnable{
 		      
 		      if(System.currentTimeMillis() - timer > 1000){
 		    	  timer += 1000;
-		    	  System.out.println("FPS: " + frames);
+//		    	  System.out.println("FPS: " + frames);
 		    	  frames = 0;
 		      }
 		  }
@@ -182,6 +183,7 @@ public class Game extends Canvas implements Runnable{
 		    }
 			if(plugboardFields[i].getText().length() < 2){ 
 	            enigma.getPlugboard().undoPlug(enigma.getPlugboard().getPlugs()[i]);
+				enigma.getPlugboard().setPlugs("", i);
 		    }
 		}
 	}

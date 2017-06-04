@@ -15,6 +15,10 @@ public class Rotor {
 		this.rotorSetting = rs;
 		this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 		
+		setRotor(r);
+	}
+	
+	public void setRotor(int r){
 		if(r == 1){
 			this.turnoverNotchFirst = "Q";
 			this.turnoverNotchSecond = "R";

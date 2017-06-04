@@ -11,6 +11,10 @@ public class Reflector{
 		
 		this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 		
+		setReflector(r);
+	}
+	
+	public void setReflector(String r){
 		if(r.equals("A")){
 			this.reflectorWiring = "EJMZALYXVBWFCRQUONTSPIKHGD".split("");
 		}
@@ -20,7 +24,6 @@ public class Reflector{
 		if(r.equals("C")){
 			this.reflectorWiring = "FVPJIAOYEDRZXWGCTKUQSBNMHL".split("");
 		}
-		
 	}
 
 	public String[] getAlphabet() {
