@@ -1,5 +1,6 @@
 package enigma2D;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -20,6 +21,7 @@ public class GLetter extends GameObject{
 	
 	public int x;
 	public int y;
+	public int index;
 	public int side;
 	public int part;
 	public String letter;
@@ -29,10 +31,11 @@ public class GLetter extends GameObject{
 	public EnigmaI enigma;
 	public Color resultColor;
 	
-	public GLetter(int x, int y, int side, int part, ID id, String letter, Handler handler, EnigmaI enigma){
+	public GLetter(int x, int y, int index, int side, int part, ID id, String letter, Handler handler, EnigmaI enigma){
 		super(x, y, id);
 		this.x = x;
 		this.y = y;
+		this.index = index;
 		this.side = side;
 		this.part = part;
 		this.letter = letter;
@@ -41,6 +44,20 @@ public class GLetter extends GameObject{
 	}
 	
 	public void tick(){
+		for(int i = 0; i < handler.object.size(); i++){
+			GLetter tempObject = (GLetter) handler.object.get(i);
+			
+			for(int j = 0; j < Game.alphabet.length; j++){
+				if(this.side == LEFT && tempObject.getSide() == RIGHT){
+					if(this.part == PLUGBOARD && tempObject.getPart() == PLUGBOARD){
+						if(this.index == tempObject.index){
+							this.letter = enigma.getPlugboard().getConnection(tempObject.getLetter());
+						}
+					}
+				}
+			}
+		}
+		
 		if(Game.input.length() > 0){	
 			if(this.part == PLUGBOARD){
 				if(this.side == RIGHT){
@@ -372,6 +389,11 @@ public class GLetter extends GameObject{
 	public Rectangle getBounds() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private AlphaComposite makeTransparent(float alpha){
+		int type = AlphaComposite.SRC_OVER;
+		return (AlphaComposite.getInstance(type, alpha));
 	}
 	
 	

@@ -46,13 +46,13 @@ public class EnigmaI {
 		rotors[RIGHT] = new Rotor(r3, rs3);
 		reflector = new Reflector(ref);
 		
-		System.out.println("--= Enigma Settings =-- ");
-		System.out.println("");
-		System.out.println("Plugboard: " + Arrays.toString(plugs));
-		System.out.println("Rotors: (" + rs1 + ") (" + rs2 + ") (" + rs3 + ")");
-		System.out.println("         " + r1 + "   " + r2 + "   " + r3);
-		System.out.println("Reflector: UKW-" + ref);
-		System.out.println("");
+//		System.out.println("--= Enigma Settings =-- ");
+//		System.out.println("");
+//		System.out.println("Plugboard: " + Arrays.toString(plugs));
+//		System.out.println("Rotors: (" + rs1 + ") (" + rs2 + ") (" + rs3 + ")");
+//		System.out.println("         " + r1 + "   " + r2 + "   " + r3);
+//		System.out.println("Reflector: UKW-" + ref);
+//		System.out.println("");
 	}
 	
 	public static void main(String[] args) {

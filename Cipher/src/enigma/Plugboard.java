@@ -22,8 +22,10 @@ public class Plugboard{
 			this.plugboard = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 		}else{
 			for(int i = 0; i < plugs.length; i++){
-				this.plugboard[this.abc.indexOf(plugs[i].charAt(0))] = plugs[i].substring(1);
-				this.plugboard[this.abc.indexOf(plugs[i].charAt(1))] = plugs[i].substring(0, 1);
+				if(plugs[i].length() > 1){
+					this.plugboard[this.abc.indexOf(plugs[i].charAt(0))] = plugs[i].substring(1);
+					this.plugboard[this.abc.indexOf(plugs[i].charAt(1))] = plugs[i].substring(0, 1);
+				}
 			}
 		}
 	}
@@ -38,6 +40,23 @@ public class Plugboard{
 	
 	public String[] getPlugs() {
 		return this.plugs;
+	}
+	
+	public void setPlugs(String plug, int pos) {
+		this.plugs[pos] = plug;
+		for(int i = 0; i < plugs.length; i++){
+			if(plugs[i].length() > 1){
+				this.plugboard[this.abc.indexOf(plugs[i].charAt(0))] = plugs[i].substring(1);
+				this.plugboard[this.abc.indexOf(plugs[i].charAt(1))] = plugs[i].substring(0, 1);
+			}
+		}
+	}
+	
+	public void undoPlug(String plug){
+		if(plug.length() > 1){
+			this.plugboard[this.abc.indexOf(plug.charAt(0))] = plug.substring(0, 1);
+			this.plugboard[this.abc.indexOf(plug.charAt(1))] = plug.substring(1);
+		}
 	}
 
 	public String getConnection(String letter) {
