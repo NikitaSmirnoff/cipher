@@ -605,9 +605,12 @@ public class Window extends Canvas{
 	}
 	
 	public static void resetEnigma(){
-		resetInput();
+		if(inputField.getText().length() > 0){
+			enigma.updateRotorSettings(INCREMENT);
+		}
+		inputField.setText("");
 		String[] plugs = {"", "", "", "", "", "", "", "", "", ""};
-		enigma.setEnigma(new EnigmaI(plugs, 1, "A", 2, "A", 3, "B", "B"));
+		enigma.setEnigma(new EnigmaI(plugs, 1, "A", 2, "A", 3, "A", "B"));
 		
 		leftRotor.setSelectedItem(rotorRomanNumerals[0]);
 		middleRotor.setSelectedItem(rotorRomanNumerals[1]);

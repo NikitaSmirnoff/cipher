@@ -151,9 +151,9 @@ public class EnigmaI {
 			result = result + encodeWord(phraseArray[i]) + " ";
 		}
 		
-		System.out.println("");
-		System.out.println("Input:  " + phrase.toUpperCase());
-		System.out.println("Output: " + result);
+//		System.out.println("");
+//		System.out.println("Input:  " + phrase.toUpperCase());
+//		System.out.println("Output: " + result);
 		return result;
 	}
 
