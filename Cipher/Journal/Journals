@@ -146,3 +146,6 @@ to be duplicates which needs to be fixed.
 - (At Home) Added a reset and a clear button. "Clear" simply clears the input and returns all rotor positions to how they started, and "reset" does the
 same thing as "clear" but sets enigma to default settings (Rotors: I, II, III) (Positions: A, A, A) (Reflector: UKW-B) and no plugs.
 
+6/5/2017 - Monday (2 Periods)
+- Added theme label, and planning to add new color themes.
+- Found new bugs, reset button goes to rotor settings "A, A, Z". But when clicked twice it returns to "A, A, A".

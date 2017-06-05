@@ -515,6 +515,7 @@ public class Window extends Canvas{
 		JLabel rightSettingLabel = new JLabel("Setting");
 		JLabel reflectorLabel = new JLabel("Reflector");
 		JLabel plugboardLabel = new JLabel("Plugboard");
+		JLabel themeLabel = new JLabel("Theme");
 		
 		contentPane.add(inputFieldLabel);
 		contentPane.add(outputFieldLabel);
@@ -526,6 +527,7 @@ public class Window extends Canvas{
 		contentPane.add(rightSettingLabel);
 		contentPane.add(reflectorLabel);
 		contentPane.add(plugboardLabel);
+		contentPane.add(themeLabel);
 		
 		layout.putConstraint(SpringLayout.NORTH, inputFieldLabel, -80, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, inputFieldLabel, GUI.ReflectorX, SpringLayout.WEST, frame.getContentPane());
@@ -550,6 +552,9 @@ public class Window extends Canvas{
 		layout.putConstraint(SpringLayout.WEST, reflectorLabel, GUI.ReflectorX + 35, SpringLayout.WEST, frame.getContentPane());
 		layout.putConstraint(SpringLayout.NORTH, plugboardLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, plugboardLabel, GUI.PlugboardX + 20, SpringLayout.WEST, frame.getContentPane());
+		
+		layout.putConstraint(SpringLayout.NORTH, themeLabel, -80, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.WEST, themeLabel, GUI.PlugboardX + 28, SpringLayout.WEST, frame.getContentPane());
 		
 		leftPositionLabel = new JLabel("[ " + enigma.getRotors(LEFT).getRotorSetting() + " ]");
 		middlePositionLabel = new JLabel("[ " + enigma.getRotors(MIDDLE).getRotorSetting() + " ]");
