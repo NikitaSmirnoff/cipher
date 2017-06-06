@@ -149,3 +149,6 @@ same thing as "clear" but sets enigma to default settings (Rotors: I, II, III) (
 6/5/2017 - Monday (2 Periods)
 - Added theme label, and planning to add new color themes.
 - Found new bugs, reset button goes to rotor settings "A, A, Z". But when clicked twice it returns to "A, A, A".
+
+6/6/2017 - Tuesday (1 Period)\
+- Bug hunting
