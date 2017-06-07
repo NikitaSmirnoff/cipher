@@ -31,35 +31,35 @@ public class GUI {
 	
 	public void render(Graphics g){
 
-		g.setColor(new Color(237, 237, 237)); 						// Background of Reflector
+		g.setColor(ColorTheme.partColor); 						// Background of Reflector
 		g.fillRect(ReflectorX, ReflectorY, ReflectorWIDTH, ReflectorHEIGHT);
 		g.setColor(Color.BLACK); 									// Border
 		g.drawRect(ReflectorX, ReflectorY, ReflectorWIDTH, ReflectorHEIGHT);
 		g.setColor(Color.BLACK); 									// Inside Border
 		g.drawRect(ReflectorX, ReflectorY, (ReflectorWIDTH - LetterBoxWIDTH), ReflectorHEIGHT);
 		
-		g.setColor(new Color(237, 237, 237)); 						// Background of LEFT Rotor
+		g.setColor(ColorTheme.partColor); 						// Background of LEFT Rotor
 		g.fillRect(LeftRotorX, RotorY, RotorWIDTH, RotorHEIGHT);
 		g.setColor(Color.BLACK); 									// Border
 		g.drawRect(LeftRotorX, RotorY, RotorWIDTH, RotorHEIGHT);
 		g.setColor(Color.BLACK); 									// Inside Border
 		g.drawRect(LeftRotorX + LetterBoxWIDTH, RotorY, RotorWIDTH - (LetterBoxWIDTH * 2), RotorHEIGHT);
 		
-		g.setColor(new Color(237, 237, 237));						// Background of MIDDLE Rotor
+		g.setColor(ColorTheme.partColor);						// Background of MIDDLE Rotor
 		g.fillRect(MiddleRotorX, RotorY, RotorWIDTH, RotorHEIGHT);
 		g.setColor(Color.BLACK); 									// Border
 		g.drawRect(MiddleRotorX, RotorY, RotorWIDTH, RotorHEIGHT);
 		g.setColor(Color.BLACK); 									// Inside Border
 		g.drawRect(MiddleRotorX + LetterBoxWIDTH, RotorY, RotorWIDTH - (LetterBoxWIDTH * 2), RotorHEIGHT);
 		
-		g.setColor(new Color(237, 237, 237)); 						// Background of RIGHT Rotor
+		g.setColor(ColorTheme.partColor); 						// Background of RIGHT Rotor
 		g.fillRect(RightRotorX, RotorY, RotorWIDTH, RotorHEIGHT);
 		g.setColor(Color.BLACK); 									// Border
 		g.drawRect(RightRotorX, RotorY, RotorWIDTH, RotorHEIGHT);
 		g.setColor(Color.BLACK); 									// Inside Border
 		g.drawRect(RightRotorX + LetterBoxWIDTH, RotorY, RotorWIDTH - (LetterBoxWIDTH * 2), RotorHEIGHT);
 		
-		g.setColor(new Color(237, 237, 237)); 						// Background of Plugboard
+		g.setColor(ColorTheme.partColor); 						// Background of Plugboard
 		g.fillRect(PlugboardX, PlugboardY, PlugboardWIDTH, PlugboardHEIGHT);
 		g.setColor(Color.BLACK); 									// Border
 		g.drawRect(PlugboardX, PlugboardY, PlugboardWIDTH, PlugboardHEIGHT);

@@ -150,5 +150,11 @@ same thing as "clear" but sets enigma to default settings (Rotors: I, II, III) (
 - Added theme label, and planning to add new color themes.
 - Found new bugs, reset button goes to rotor settings "A, A, Z". But when clicked twice it returns to "A, A, A".
 
-6/6/2017 - Tuesday (1 Period)\
+6/6/2017 - Tuesday (1 Period)
 - Bug hunting
+
+6/7/2017 - Wednesday (2 Periods)
+- Added radio buttons for theme selection.
+- Added new class called ColorTheme. It holds the current theme colors and can be changed with the call to changeColorTheme(theme);
+- changeColorTheme(theme) is called when the theme radio buttons are toggled.
+- Replaced all hard coded colors in graphic drawing classes with the color variables from the class ColorTheme.

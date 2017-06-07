@@ -18,6 +18,8 @@ import java.util.Arrays;
 
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -25,6 +27,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
@@ -38,8 +41,14 @@ public class Window extends Canvas{
 	public static final int LEFT = 0;
 	public static final int MIDDLE = 1;
 	public static final int RIGHT = 2;
+	
 	public static final int INCREMENT = 0;
 	public static final int DECREMENT = 1;
+	
+	public static final int CLASSIC = 0;
+	public static final int COOL = 1;
+	public static final int MODERN = 2;
+	public static final int WARM = 3;
 
 	private static final long serialVersionUID = -7210508713407496964L;
 	public static JFrame frame;
@@ -72,6 +81,11 @@ public class Window extends Canvas{
 	public static JLabel leftPositionLabel;
 	public static JLabel middlePositionLabel;
 	public static JLabel rightPositionLabel;
+	public static ButtonGroup themeButtonGroup;
+	public static JRadioButton themeAButton;
+	public static JRadioButton themeBButton;
+	public static JRadioButton themeCButton;
+	public static JRadioButton themeDButton;
 	
 	public static EnigmaI enigma;
 	private static String[] rotorRomanNumerals  = {"   I ", "   II ", "   III ", "   IV ", "   V "};
@@ -93,7 +107,7 @@ public class Window extends Canvas{
 		layout = new SpringLayout();
 		contentPane = frame.getContentPane();
 		contentPane.setLayout(layout);
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(ColorTheme.backgroundColor);
 		
 		JPanel panel = new JPanel();	//Enigma Window
 		panel.setLayout(new GridLayout(1, 1));			
@@ -104,6 +118,7 @@ public class Window extends Canvas{
 		addTextFields();
 		addComboBoxes();
 		addButtons();
+		addRadioButtons();
 		
 		layout.putConstraint(SpringLayout.NORTH, panel, 0, SpringLayout.NORTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.SOUTH, panel, 550, SpringLayout.NORTH, frame.getContentPane());
@@ -112,6 +127,58 @@ public class Window extends Canvas{
 		
 		frame.setVisible(true);
 		game.start();
+	}
+	
+	private static void addRadioButtons(){
+		themeAButton = new JRadioButton("Classic", true);
+		themeBButton = new JRadioButton("Cool", false);
+		themeCButton = new JRadioButton("Modern", false);
+		themeDButton = new JRadioButton("Warm", false);
+		
+		contentPane.add(themeAButton);
+		themeAButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				ColorTheme.changeColorTheme(CLASSIC);
+			}
+		});
+		contentPane.add(themeBButton);
+		themeBButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+					ColorTheme.changeColorTheme(COOL);
+			}
+		});
+		contentPane.add(themeCButton);
+		themeCButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				ColorTheme.changeColorTheme(MODERN);
+			}
+		});
+		contentPane.add(themeDButton);
+		themeDButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent action){
+				ColorTheme.changeColorTheme(WARM);
+			}
+		});
+		
+		themeAButton.setBackground(ColorTheme.backgroundColor);
+		themeBButton.setBackground(ColorTheme.backgroundColor);
+		themeCButton.setBackground(ColorTheme.backgroundColor);
+		themeDButton.setBackground(ColorTheme.backgroundColor);
+		
+		layout.putConstraint(SpringLayout.NORTH, themeAButton, -70, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.WEST, themeAButton, GUI.PlugboardX - 20, SpringLayout.WEST, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, themeBButton, -70, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.WEST, themeBButton, GUI.PlugboardX + 60, SpringLayout.WEST, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, themeCButton, -50, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.WEST, themeCButton, GUI.PlugboardX - 20, SpringLayout.WEST, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, themeDButton, -50, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.WEST, themeDButton, GUI.PlugboardX + 60, SpringLayout.WEST, frame.getContentPane());
+		
+		themeButtonGroup = new ButtonGroup();
+		themeButtonGroup.add(themeAButton);
+		themeButtonGroup.add(themeBButton);
+		themeButtonGroup.add(themeCButton);
+		themeButtonGroup.add(themeDButton);
 	}
 	
 	private static void addButtons(){
@@ -553,7 +620,7 @@ public class Window extends Canvas{
 		layout.putConstraint(SpringLayout.NORTH, plugboardLabel, -170, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, plugboardLabel, GUI.PlugboardX + 20, SpringLayout.WEST, frame.getContentPane());
 		
-		layout.putConstraint(SpringLayout.NORTH, themeLabel, -80, SpringLayout.SOUTH, frame.getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, themeLabel, -85, SpringLayout.SOUTH, frame.getContentPane());
 		layout.putConstraint(SpringLayout.WEST, themeLabel, GUI.PlugboardX + 28, SpringLayout.WEST, frame.getContentPane());
 		
 		leftPositionLabel = new JLabel("[ " + enigma.getRotors(LEFT).getRotorSetting() + " ]");

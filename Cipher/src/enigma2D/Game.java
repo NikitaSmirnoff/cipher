@@ -55,6 +55,7 @@ public class Game extends Canvas implements Runnable{
 //	}
 	
 	public Game(){
+		ColorTheme.changeColorTheme(0);
 		handler = new Handler(); // Initialize Handler
 		this.addKeyListener(new KeyInput(handler)); // Tell the game to start listening for keys
 		
@@ -147,6 +148,8 @@ public class Game extends Canvas implements Runnable{
 	
 	
 	private void tick() {
+		Window.contentPane.setBackground(ColorTheme.backgroundColor);
+		
 		handler.tick();
 		if(gui != null){
 			gui.tick();
@@ -197,7 +200,7 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();
 		
-		g.setColor(new Color(255, 255, 255)); // Background color
+		g.setColor(ColorTheme.backgroundColor); // Background color
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		if(gui != null){

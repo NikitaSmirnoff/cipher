@@ -63,11 +63,11 @@ public class GLetter extends GameObject{
 				if(this.side == RIGHT){
 					if(enigma.getInput().equals(letter)){
 						result = true;
-						resultColor = Color.RED;
+						resultColor = ColorTheme.selectedBColor;
 					} else {
 						if(enigma.getResultOfPlugboardBack().equals(letter)){
 							result = true;
-							resultColor = Color.GREEN;
+							resultColor = ColorTheme.selectedAColor;
 						} else {
 							result = false;
 						}
@@ -77,11 +77,11 @@ public class GLetter extends GameObject{
 				if(this.side == LEFT){
 					if(enigma.getResultOfPlugboard().equals(letter)){
 						result = true;
-						resultColor = Color.RED;
+						resultColor = ColorTheme.selectedBColor;
 					} else {
 						if(enigma.getInputOfPlugboardBack().equals(letter)){
 							result = true;
-							resultColor = Color.GREEN;
+							resultColor = ColorTheme.selectedAColor;
 						} else {
 							result = false;
 						}
@@ -100,11 +100,11 @@ public class GLetter extends GameObject{
 					if(this.part == RIGHT){
 						if(enigma.getInputOfRotorRight().equals(letter)){
 							result = true;
-							resultColor = Color.RED;
+							resultColor = ColorTheme.selectedBColor;
 						} else {
 							if(enigma.getResultOfRotorRightBack().equals(letter)){
 								result = true;
-								resultColor = Color.GREEN;
+								resultColor = ColorTheme.selectedAColor;
 							} else {
 								result = false;
 							}
@@ -113,11 +113,11 @@ public class GLetter extends GameObject{
 					if(this.part == MIDDLE){
 						if(enigma.getInputOfRotorMiddle().equals(letter)){
 							result = true;
-							resultColor = Color.RED;
+							resultColor = ColorTheme.selectedBColor;
 						} else {
 							if(enigma.getResultOfRotorMiddleBack().equals(letter)){
 								result = true;
-								resultColor = Color.GREEN;
+								resultColor = ColorTheme.selectedAColor;
 							} else {
 								result = false;
 							}
@@ -126,11 +126,11 @@ public class GLetter extends GameObject{
 					if(this.part == LEFT){
 						if(enigma.getInputOfRotorLeft().equals(letter)){
 							result = true;
-							resultColor = Color.RED;
+							resultColor = ColorTheme.selectedBColor;
 						} else {
 							if(enigma.getResultOfRotorLeftBack().equals(letter)){
 								result = true;
-								resultColor = Color.GREEN;
+								resultColor = ColorTheme.selectedAColor;
 							} else {
 								result = false;
 							}
@@ -142,11 +142,11 @@ public class GLetter extends GameObject{
 					if(this.part == RIGHT){
 						if(enigma.getResultOfRotorRight().equals(letter)){
 							result = true;
-							resultColor = Color.RED;
+							resultColor = ColorTheme.selectedBColor;
 						} else {
 							if(enigma.getInputOfRotorRightBack().equals(letter)){
 								result = true;
-								resultColor = Color.GREEN;
+								resultColor = ColorTheme.selectedAColor;
 							} else {
 								result = false;
 							}
@@ -155,11 +155,11 @@ public class GLetter extends GameObject{
 					if(this.part == MIDDLE){
 						if(enigma.getResultOfRotorMiddle().equals(letter)){
 							result = true;
-							resultColor = Color.RED;
+							resultColor = ColorTheme.selectedBColor;
 						} else {
 							if(enigma.getInputOfRotorMiddleBack().equals(letter)){
 								result = true;
-								resultColor = Color.GREEN;
+								resultColor = ColorTheme.selectedAColor;
 							} else {
 								result = false;
 							}
@@ -168,11 +168,11 @@ public class GLetter extends GameObject{
 					if(this.part == LEFT){
 						if(enigma.getResultOfRotorLeft().equals(letter)){
 							result = true;
-							resultColor = Color.RED;
+							resultColor = ColorTheme.selectedBColor;
 						} else {
 							if(enigma.getInputOfRotorLeftBack().equals(letter)){
 								result = true;
-								resultColor = Color.GREEN;
+								resultColor = ColorTheme.selectedAColor;
 							} else {
 								result = false;
 							}
@@ -185,11 +185,11 @@ public class GLetter extends GameObject{
 				if(this.side == RIGHT){
 					if(enigma.getInputOfReflector().equals(letter)){
 						result = true;
-						resultColor = Color.RED;
+						resultColor = ColorTheme.selectedBColor;
 					} else {
 						if(enigma.getResultOfReflector().equals(letter)){
 							result = true;
-							resultColor = Color.GREEN;
+							resultColor = ColorTheme.selectedAColor;
 						} else {
 							result = false;
 						}
@@ -218,7 +218,7 @@ public class GLetter extends GameObject{
 				g.setColor(new Color(157, 157, 157)); 					// Background if the letter is the rotor's current position
 				g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
 			} else {
-				g.setColor(new Color(247, 247, 247)); 					// Background
+				g.setColor(ColorTheme.letterColor); 					// Background
 				g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
 			}
 		}
@@ -253,7 +253,7 @@ public class GLetter extends GameObject{
 								drawRotorLine(Color.BLACK, 3, g, tempObject);
 							} else {
 								if(enigma.getRotors(RIGHT).getConnection(this.letter).equals(tempObject.getLetter())){
-									drawRotorLine(Color.GRAY, 1, g, tempObject);
+									drawRotorLine(ColorTheme.lineColor, 1, g, tempObject);
 								}
 							}
 						}
@@ -263,7 +263,7 @@ public class GLetter extends GameObject{
 								drawRotorLine(Color.BLACK, 3, g, tempObject);
 							} else {
 								if(enigma.getRotors(MIDDLE).getConnection(this.letter).equals(tempObject.getLetter())){
-									drawRotorLine(Color.GRAY, 1, g, tempObject);
+									drawRotorLine(ColorTheme.lineColor, 1, g, tempObject);
 								}
 							}
 						}
@@ -273,7 +273,7 @@ public class GLetter extends GameObject{
 								drawRotorLine(Color.BLACK, 3, g, tempObject);
 							} else {
 								if(enigma.getRotors(LEFT).getConnection(this.letter).equals(tempObject.getLetter())){
-									drawRotorLine(Color.GRAY, 1, g, tempObject);
+									drawRotorLine(ColorTheme.lineColor, 1, g, tempObject);
 								}
 							}
 						}
@@ -282,10 +282,10 @@ public class GLetter extends GameObject{
 						if(this.part == REFLECTOR && tempObject.getPart() == REFLECTOR){
 							if(enigma.getInputOfReflector().equals(tempObject.getLetter()) && enigma.getResultOfReflector().equals(this.letter)){
 								drawReflectorLine(Color.BLACK, 3, g, tempObject);
-								drawReflectorLine(Color.GRAY, 1, g, tempObject);
+								drawReflectorLine(ColorTheme.lineColor, 1, g, tempObject);
 							} else {
 								if(enigma.getReflector().getPos(tempObject.getLetter()) > enigma.getReflector().getPos(this.letter) && enigma.getReflector().getConnection(this.letter).equals(tempObject.getLetter())){
-									drawReflectorLine(Color.GRAY, 1, g, tempObject);
+									drawReflectorLine(ColorTheme.lineColor, 1, g, tempObject);
 								}
 							}
 						}
@@ -296,24 +296,24 @@ public class GLetter extends GameObject{
 					if(this.side == RIGHT && tempObject.getSide() == LEFT){
 						if(this.part == RIGHT && tempObject.getPart() == RIGHT){
 							if(enigma.getRotors(RIGHT).getConnection(this.letter).equals(tempObject.getLetter())){
-								drawRotorLine(Color.GRAY, 1, g, tempObject);
+								drawRotorLine(ColorTheme.lineColor, 1, g, tempObject);
 							}
 						}
 						if(this.part == MIDDLE && tempObject.getPart() == MIDDLE){
 							if(enigma.getRotors(MIDDLE).getConnection(this.letter).equals(tempObject.getLetter())){
-								drawRotorLine(Color.GRAY, 1, g, tempObject);
+								drawRotorLine(ColorTheme.lineColor, 1, g, tempObject);
 							}
 						}
 						if(this.part == LEFT && tempObject.getPart() == LEFT){
 							if(enigma.getRotors(LEFT).getConnection(this.letter).equals(tempObject.getLetter())){
-								drawRotorLine(Color.GRAY, 1, g, tempObject);
+								drawRotorLine(ColorTheme.lineColor, 1, g, tempObject);
 							}
 						}
 					}
 					if(this.side == RIGHT && tempObject.getSide() == RIGHT){
 						if(this.part == REFLECTOR && tempObject.getPart() == REFLECTOR){
 							if(enigma.getReflector().getPos(tempObject.getLetter()) > enigma.getReflector().getPos(this.letter) && enigma.getReflector().getConnection(this.letter).equals(tempObject.getLetter())){
-								drawReflectorLine(Color.GRAY, 1, g, tempObject);
+								drawReflectorLine(ColorTheme.lineColor, 1, g, tempObject);
 							}
 						}
 					}
