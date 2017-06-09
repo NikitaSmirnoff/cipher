@@ -8,8 +8,8 @@ public class ColorTheme {
 	
 	public static final int CLASSIC = 0;
 	public static final int COOL = 1;
-	public static final int MODERN = 2;
-	public static final int WARM = 3;
+	public static final int PEPE = 2;
+	public static final int RUSTIC = 3;
 	
 	public static Color backgroundColor;
 	public static Color letterColor;
@@ -34,26 +34,26 @@ public class ColorTheme {
 		if(theme == COOL){
 			backgroundColor = new Color(244, 244, 244);
 			letterColor = new Color(220, 208, 192);
-			partColor = new Color(210, 198, 182);
-			selectedAColor = new Color(192, 178, 131);
-			selectedBColor = new Color(192, 178, 131);
+			partColor = new Color(230, 218, 202);
+			selectedAColor = new Color(162, 128, 91);
+			selectedBColor = new Color(162, 128, 91);
 			lineColor = Color.GRAY;
 		}
-//		if(theme == MODERN){
-//			backgroundColor = new Color();
-//			letterColor = new Color();
-//			partColor = new Color();
-//			selectedAColor = new Color();
-//			selectedBColor = new Color();
-//			lineColor = new Color();
-//		}
-		if(theme == WARM){
-			backgroundColor = new Color(86, 86, 86);
+		if(theme == PEPE){
+			backgroundColor = new Color(100, 134, 105);
+			letterColor = new Color(148, 189, 147);
+			partColor = new Color(175, 213, 170);
+			selectedAColor = new Color(89, 140, 124);
+			selectedBColor = new Color(89, 140, 124);
+			lineColor = new Color(58, 90, 64);
+		}
+		if(theme == RUSTIC){
+			backgroundColor = new Color(222, 189, 158);
 			letterColor = new Color(215, 206, 199);
-			partColor = new Color(205, 196, 189);
-			selectedAColor = new Color(118, 50, 63);
-			selectedBColor = new Color(118, 50, 63);
-			lineColor = new Color(192, 159, 128);
+			partColor = new Color(225, 216, 209);
+			selectedAColor = new Color(148, 80, 93);
+			selectedBColor = new Color(148, 80, 93);
+			lineColor = new Color(86, 86, 86);
 		}
 	}
 

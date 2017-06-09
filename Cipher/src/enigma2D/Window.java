@@ -47,8 +47,8 @@ public class Window extends Canvas{
 	
 	public static final int CLASSIC = 0;
 	public static final int COOL = 1;
-	public static final int MODERN = 2;
-	public static final int WARM = 3;
+	public static final int PEPE = 2;
+	public static final int RUSTIC = 3;
 
 	private static final long serialVersionUID = -7210508713407496964L;
 	public static JFrame frame;
@@ -132,8 +132,8 @@ public class Window extends Canvas{
 	private static void addRadioButtons(){
 		themeAButton = new JRadioButton("Classic", true);
 		themeBButton = new JRadioButton("Cool", false);
-		themeCButton = new JRadioButton("Modern", false);
-		themeDButton = new JRadioButton("Warm", false);
+		themeCButton = new JRadioButton("Pepe", false);
+		themeDButton = new JRadioButton("Rustic", false);
 		
 		contentPane.add(themeAButton);
 		themeAButton.addActionListener(new ActionListener() {
@@ -150,13 +150,13 @@ public class Window extends Canvas{
 		contentPane.add(themeCButton);
 		themeCButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent action){
-				ColorTheme.changeColorTheme(MODERN);
+				ColorTheme.changeColorTheme(PEPE);
 			}
 		});
 		contentPane.add(themeDButton);
 		themeDButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent action){
-				ColorTheme.changeColorTheme(WARM);
+				ColorTheme.changeColorTheme(RUSTIC);
 			}
 		});
 		

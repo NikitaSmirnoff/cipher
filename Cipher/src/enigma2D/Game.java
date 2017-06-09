@@ -149,6 +149,10 @@ public class Game extends Canvas implements Runnable{
 	
 	private void tick() {
 		Window.contentPane.setBackground(ColorTheme.backgroundColor);
+		Window.themeAButton.setBackground(ColorTheme.backgroundColor);
+		Window.themeBButton.setBackground(ColorTheme.backgroundColor);
+		Window.themeCButton.setBackground(ColorTheme.backgroundColor);
+		Window.themeDButton.setBackground(ColorTheme.backgroundColor);
 		
 		handler.tick();
 		if(gui != null){

@@ -209,6 +209,18 @@ public class GLetter extends GameObject{
 	}
 	
 	public void render(Graphics g){
+//		if(this.part == LEFT){
+//			this.y = GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * (index - enigma.getRotors(LEFT).getPos(enigma.getRotors(LEFT).getRotorSetting())));
+//		} else {
+//			if(this.part == MIDDLE){
+//				this.y = GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * (index - enigma.getRotors(MIDDLE).getPos(enigma.getRotors(MIDDLE).getRotorSetting())));
+//			} else {
+//				if(this.part == RIGHT){
+////					this.index = enigma.getRotors(RIGHT).getPos(enigma.getRotors(RIGHT).getRotorSetting());
+//					this.y = GUI.getRotorY() + ((GUI.getRotorHEIGHT() / 26) * (index - enigma.getRotors(RIGHT).getPos(enigma.getRotors(RIGHT).getRotorSetting())));
+//				}
+//			}
+//		}
 		
 		if(result){
 			g.setColor(resultColor); 									// Background if the letter is a part of the encryption
