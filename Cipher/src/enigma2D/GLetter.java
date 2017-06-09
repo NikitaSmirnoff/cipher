@@ -26,7 +26,10 @@ public class GLetter extends GameObject{
 	public int part;
 	public String letter;
 	public boolean result = false;
+	public boolean input = false;
+	public boolean output = false;
 	public boolean position = false;
+	public boolean turnoverNotch = false;
 	public Handler handler;
 	public EnigmaI enigma;
 	public Color resultColor;
@@ -63,13 +66,19 @@ public class GLetter extends GameObject{
 				if(this.side == RIGHT){
 					if(enigma.getInput().equals(letter)){
 						result = true;
+						input = true;
+						output = false;
 						resultColor = ColorTheme.selectedBColor;
 					} else {
 						if(enigma.getResultOfPlugboardBack().equals(letter)){
 							result = true;
+							input = false;
+							output = true;
 							resultColor = ColorTheme.selectedAColor;
 						} else {
 							result = false;
+							input = false;
+							output = false;
 						}
 					}
 					
@@ -140,6 +149,11 @@ public class GLetter extends GameObject{
 				
 				if(this.side == LEFT){
 					if(this.part == RIGHT){
+						if(enigma.getRotors(this.part).getFirstTurnoverNotch().equals(letter)){
+							turnoverNotch = true;
+						} else {
+							turnoverNotch = false;
+						}
 						if(enigma.getResultOfRotorRight().equals(letter)){
 							result = true;
 							resultColor = ColorTheme.selectedBColor;
@@ -153,6 +167,11 @@ public class GLetter extends GameObject{
 						}
 					}
 					if(this.part == MIDDLE){
+						if(enigma.getRotors(this.part).getFirstTurnoverNotch().equals(letter)){
+							turnoverNotch = true;
+						} else {
+							turnoverNotch = false;
+						}
 						if(enigma.getResultOfRotorMiddle().equals(letter)){
 							result = true;
 							resultColor = ColorTheme.selectedBColor;
@@ -222,9 +241,33 @@ public class GLetter extends GameObject{
 //			}
 //		}
 		
+		if(turnoverNotch){
+			int[] x = {(this.x - GUI.getLetterBoxWIDTH() * 1 / 2), this.x, this.x};
+			int[] y = {(this.y + GUI.getRotorHEIGHT() / 26), (this.y + GUI.getRotorHEIGHT() / 52 * 3), (this.y + GUI.getRotorHEIGHT() / 52)};
+			g.setColor(new Color(157, 157, 157));
+			g.fillPolygon(x, y, 3);
+			g.setColor(Color.BLACK);
+			g.drawPolygon(x, y, 3);
+		}
 		if(result){
 			g.setColor(resultColor); 									// Background if the letter is a part of the encryption
 			g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
+			if(output){
+				int[] x = {(this.x + GUI.getLetterBoxWIDTH() * 6 / 5), (this.x + GUI.getLetterBoxWIDTH() * 6 / 5), (this.x + GUI.getLetterBoxWIDTH() * 3 / 2)};
+				int[] y = {(this.y + GUI.getRotorHEIGHT() / 26), this.y, (this.y + GUI.getRotorHEIGHT() / 52)};
+				g.setColor(ColorTheme.selectedAColor);
+				g.fillPolygon(x, y, 3);
+				g.setColor(Color.BLACK);
+				g.drawPolygon(x, y, 3);
+			}
+			if(input){
+				int[] x = {(this.x + GUI.getLetterBoxWIDTH() * 6 / 5), (this.x + GUI.getLetterBoxWIDTH() * 3 / 2), (this.x + GUI.getLetterBoxWIDTH() * 3 / 2)};
+				int[] y = {(this.y + GUI.getRotorHEIGHT() / 52), this.y, (this.y + GUI.getRotorHEIGHT() / 26)};
+				g.setColor(ColorTheme.selectedBColor);
+				g.fillPolygon(x, y, 3);
+				g.setColor(Color.BLACK);
+				g.drawPolygon(x, y, 3);
+			}
 		} else {
 			if(position){
 				g.setColor(new Color(157, 157, 157)); 					// Background if the letter is the rotor's current position

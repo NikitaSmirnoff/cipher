@@ -158,3 +158,7 @@ same thing as "clear" but sets enigma to default settings (Rotors: I, II, III) (
 - Added new class called ColorTheme. It holds the current theme colors and can be changed with the call to changeColorTheme(theme);
 - changeColorTheme(theme) is called when the theme radio buttons are toggled.
 - Replaced all hard coded colors in graphic drawing classes with the color variables from the class ColorTheme.
+
+6/9/2017 - Friday (2 Periods)
+- Added an inward and outward facing arrow to the right of the plugboard that makes the resemblance between input and output.
+- Added a gray triangle that represents the turnover notches of the rotors, hugging the left of the rotor. (But doesnt update properly when changing rotors)
