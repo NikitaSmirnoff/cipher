@@ -244,7 +244,7 @@ public class GLetter extends GameObject{
 		if(turnoverNotch){
 			int[] x = {(this.x - GUI.getLetterBoxWIDTH() * 1 / 2), this.x, this.x};
 			int[] y = {(this.y + GUI.getRotorHEIGHT() / 26), (this.y + GUI.getRotorHEIGHT() / 52 * 3), (this.y + GUI.getRotorHEIGHT() / 52)};
-			g.setColor(new Color(157, 157, 157));
+			g.setColor(ColorTheme.letterColor);
 			g.fillPolygon(x, y, 3);
 			g.setColor(Color.BLACK);
 			g.drawPolygon(x, y, 3);
