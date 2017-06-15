@@ -241,14 +241,14 @@ public class GLetter extends GameObject{
 //			}
 //		}
 		
-		if(turnoverNotch){
-			int[] x = {(this.x - GUI.getLetterBoxWIDTH() * 1 / 2), this.x, this.x};
-			int[] y = {(this.y + GUI.getRotorHEIGHT() / 26), (this.y + GUI.getRotorHEIGHT() / 52 * 3), (this.y + GUI.getRotorHEIGHT() / 52)};
-			g.setColor(ColorTheme.letterColor);
-			g.fillPolygon(x, y, 3);
-			g.setColor(Color.BLACK);
-			g.drawPolygon(x, y, 3);
-		}
+//		if(turnoverNotch){
+//			int[] x = {(this.x - GUI.getLetterBoxWIDTH() * 1 / 2), this.x, this.x};
+//			int[] y = {(this.y + GUI.getRotorHEIGHT() / 26), (this.y + GUI.getRotorHEIGHT() / 52 * 3), (this.y + GUI.getRotorHEIGHT() / 52)};
+//			g.setColor(ColorTheme.letterColor);
+//			g.fillPolygon(x, y, 3);
+//			g.setColor(Color.BLACK);
+//			g.drawPolygon(x, y, 3);
+//		}
 		if(result){
 			g.setColor(resultColor); 									// Background if the letter is a part of the encryption
 			g.fillRect(this.x, this.y, GUI.getLetterBoxWIDTH(), GUI.getRotorHEIGHT() / 26);
@@ -284,6 +284,16 @@ public class GLetter extends GameObject{
 		g.setFont(new Font("Courier", Font.BOLD,12));
 		if(this.side == LEFT){
 			g.drawString(this.letter, this.x + ((GUI.getLetterBoxWIDTH() / 10) * 7), this.y + (GUI.getRotorHEIGHT() / 32));
+			//Draw Turnover Notches
+			if((this.letter.equals(enigma.getRotors(RIGHT).getFirstTurnoverNotch()) && this.part == RIGHT) || 
+					(this.letter.equals(enigma.getRotors(MIDDLE).getFirstTurnoverNotch()) && this.part == MIDDLE)){
+				int[] x = {(this.x - GUI.getLetterBoxWIDTH() * 1 / 2), this.x, this.x};
+				int[] y = {(this.y + GUI.getRotorHEIGHT() / 26), (this.y + GUI.getRotorHEIGHT() / 52 * 3), (this.y + GUI.getRotorHEIGHT() / 52)};
+				g.setColor(ColorTheme.letterColor);
+				g.fillPolygon(x, y, 3);
+				g.setColor(Color.BLACK);
+				g.drawPolygon(x, y, 3);
+			}
 		}
 		if(this.side == RIGHT){
 			g.drawString(this.letter, this.x + ((GUI.getLetterBoxWIDTH() / 10) * 2), this.y + (GUI.getRotorHEIGHT() / 32));

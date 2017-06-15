@@ -30,6 +30,9 @@ public class GUI {
 	}
 	
 	public void render(Graphics g){
+		g.setColor(Color.BLACK); 
+		g.setFont(new Font("Bell MT", Font.BOLD, 20));
+		g.drawString("Enigma by Nikita Smirnov", 407, 25);
 
 		g.setColor(ColorTheme.partColor); 						// Background of Reflector
 		g.fillRect(ReflectorX, ReflectorY, ReflectorWIDTH, ReflectorHEIGHT);

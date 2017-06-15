@@ -87,6 +87,8 @@ public class Window extends Canvas{
 	public static JRadioButton themeCButton;
 	public static JRadioButton themeDButton;
 	
+	public static boolean resetPressed = false;
+	
 	public static EnigmaI enigma;
 	private static String[] rotorRomanNumerals  = {"   I ", "   II ", "   III ", "   IV ", "   V "};
 	private static String[] reflectors  = {"   UKW-A   ", "   UKW-B   ", "   UKW-C   "};
@@ -266,6 +268,7 @@ public class Window extends Canvas{
 		contentPane.add(resetButton);
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent action){
+				resetPressed = true;
 				resetEnigma();
 			}
 		});

@@ -35,16 +35,16 @@ public class ColorTheme {
 			backgroundColor = new Color(244, 244, 244);
 			letterColor = new Color(220, 208, 192);
 			partColor = new Color(230, 218, 202);
-			selectedAColor = new Color(162, 128, 91);
-			selectedBColor = new Color(162, 128, 91);
+			selectedAColor = new Color(142, 108, 71);
+			selectedBColor = new Color(192, 158, 121);
 			lineColor = Color.GRAY;
 		}
 		if(theme == PEPE){
 			backgroundColor = new Color(100, 134, 105);
 			letterColor = new Color(148, 189, 147);
 			partColor = new Color(175, 213, 170);
-			selectedAColor = new Color(89, 140, 124);
-			selectedBColor = new Color(89, 140, 124);
+			selectedAColor = new Color(69, 120, 104);
+			selectedBColor = new Color(119, 170, 154);
 			lineColor = new Color(58, 90, 64);
 		}
 		if(theme == RUSTIC){
@@ -52,7 +52,7 @@ public class ColorTheme {
 			letterColor = new Color(215, 206, 199);
 			partColor = new Color(225, 216, 209);
 			selectedAColor = new Color(148, 80, 93);
-			selectedBColor = new Color(148, 80, 93);
+			selectedBColor = new Color(198, 130, 143);
 			lineColor = new Color(86, 86, 86);
 		}
 	}

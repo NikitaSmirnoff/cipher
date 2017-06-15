@@ -161,7 +161,9 @@ public class Game extends Canvas implements Runnable{
 		
 		if(!Window.inputField.getText().equals(input)){						// If text has changed
 			if(input.length() > Window.inputField.getText().length()){		// If input has been backspaced
-				enigma.updateRotorSettings(DECREMENT);						// Undo the rotor settings
+				if(!Window.resetPressed){
+					enigma.updateRotorSettings(DECREMENT);						// Undo the rotor settings
+				}
 				output = output.substring(0, output.length() - 1);
 				
 				if(Window.inputField.getText().length() > 0){
@@ -180,6 +182,7 @@ public class Game extends Canvas implements Runnable{
 			}
 			Window.outputField.setText(output);
 			updateSettingsLabels();
+			Window.resetPressed = false;
 		}
 		
 		JTextField[] plugboardFields = {Window.plugboardAField, Window.plugboardBField, Window.plugboardCField, Window.plugboardDField, Window.plugboardEField,
